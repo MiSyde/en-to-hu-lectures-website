@@ -1,0 +1,31 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    image: spookae/static-web:1.0
+    ports:
+      - "8080:80"
+    volumes:
+      - webdata:/usr/share/nginx/html
+    networks:
+      - webnet
+
+  console:
+    build:
+      context: ./console
+    image: spookae/static-console:1.0
+    volumes:
+      - webdata:/app/data
+    networks:
+      - webnet
+    stdin_open: true
+    tty: true
+
+networks:
+  webnet:
+    name: lecture-website-network
+
+volumes:
+  webdata:
+    name: lecture-website-volume
