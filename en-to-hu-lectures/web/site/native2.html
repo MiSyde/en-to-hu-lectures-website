@@ -8,21 +8,21 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="stackedit">
-  <div class="stackedit__html"><h1 id="felhő-natív-hálózati-funkciók-fejlesztése">Felhő-natív hálózati funkciók fejlesztése:</h1>
-<h2 id="felhő-natív-megközelítés-serverless-számítástechnika-nyilvános-és-privát-platformok">Felhő-natív megközelítés, Serverless számítástechnika, Nyilvános és privát platformok</h2>
+<body>
+  <div><h1>Felhő-natív hálózati funkciók fejlesztése:</h1>
+<h2>Felhő-natív megközelítés, Serverless számítástechnika, Nyilvános és privát platformok</h2>
 <p>Balázs Sonkoly, Németh Felicián, Pelle István, Fodor Balázs<br>
 2026-09-14</p>
 <hr>
-<h1 id="felhő-natív-megközelítés-cloud-native">1. Felhő-natív megközelítés (Cloud Native)</h1>
-<h2 id="felhő-natív-a-koncepció">Felhő-natív: a koncepció</h2>
+<h1>1. Felhő-natív megközelítés (Cloud Native)</h1>
+<h2>Felhő-natív: a koncepció</h2>
 <p><strong>Felhő-natív</strong></p>
 <ul>
 <li>az alkalmazást a felhő képességeit és szolgáltatásait figyelembe véve tervezzük</li>
 <li>kihasználjuk a felhő által biztosított skálázhatóságot, rugalmasságot, ellenálló képességet és alkalmazkodóképességet</li>
 <li>remek, de mit jelent ez a gyakorlatban?</li>
 </ul>
-<h2 id="a-felhő-előnyei">A felhő előnyei</h2>
+<h2>A felhő előnyei</h2>
 <p><strong>Skálázhatóság</strong></p>
 <ul>
 <li>az erőforrások dinamikusan állíthatók</li>
@@ -63,7 +63,7 @@
 <li>felhő tervezési minták (Cloud design patterns)</li>
 <li>AWS Well-Architected keretrendszer</li>
 </ul>
-<h2 id="felhő-natív-a-koncepció-folytatás">Felhő-natív: a koncepció (folytatás)</h2>
+<h2>Felhő-natív: a koncepció (folytatás)</h2>
 <p><strong>Ennek eredményeként</strong></p>
 <ul>
 <li>az alkalmazások konténerekből épülnek fel
@@ -82,7 +82,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="felhő-natív-mikroszolgáltatás-ismét">Felhő-natív, Mikroszolgáltatás (ismét)</h2>
+<h2>Felhő-natív, Mikroszolgáltatás (ismét)</h2>
 <ul>
 <li>egy architekturális stílus</li>
 <li>alkalmazás = szolgáltatások gyűjteménye</li>
@@ -90,7 +90,7 @@
 <li>lazán csatoltak</li>
 <li><a href="https://microservices.io">https://microservices.io</a></li>
 </ul>
-<h2 id="tervezési-minták">Tervezési minták</h2>
+<h2>Tervezési minták</h2>
 <p><strong>Miért?</strong></p>
 <ul>
 <li>miért használjuk őket a szoftverfejlesztésben?</li>
@@ -117,7 +117,7 @@
 <li>Externalized State (Kiszervezett állapot)</li>
 <li>stb.</li>
 </ul>
-<h2 id="tervezési-minták-publisher-subscriber">Tervezési minták: Publisher-Subscriber</h2>
+<h2>Tervezési minták: Publisher-Subscriber</h2>
 <p><strong>Kontextus</strong></p>
 <ul>
 <li>a rendszer komponenseinek gyakran szükséges információt szolgáltatniuk más komponenseknek, ahogy az események megtörténnek</li>
@@ -133,7 +133,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="tervezési-minták-circuit-breaker">Tervezési minták: Circuit Breaker</h2>
+<h2>Tervezési minták: Circuit Breaker</h2>
 <p><strong>Kontextus</strong></p>
 <ul>
 <li>előfordulhatnak olyan helyzetek, ahol a hibák előre nem látható eseményekből fakadnak, és sokkal tovább tart a javításuk</li>
@@ -145,7 +145,7 @@
 <li>proxyként viselkedik a potenciálisan sikertelen műveletek számára</li>
 <li>figyeli a nemrégiben történt hibák számát, és ez alapján dönti el, hogy engedélyezze-e a művelet folytatását, vagy azonnal kivételt adjon vissza</li>
 </ul>
-<h2 id="tervezési-minták-gateway-aggregation">Tervezési minták: Gateway Aggregation</h2>
+<h2>Tervezési minták: Gateway Aggregation</h2>
 <p><strong>Kontextus</strong></p>
 <ul>
 <li>egyetlen feladat elvégzéséhez a kliensnek több hívást is kell indítania különböző háttérszolgáltatások felé</li>
@@ -156,7 +156,7 @@
 <li>egy átjáró (gateway) használata a kliens és a szolgáltatások közötti bőbeszédűség csökkentésére</li>
 <li>az átjáró fogadja a kliens kéréseit, szétosztja azokat a különböző háttérrendszerek felé, majd összesíti az eredményeket, és visszaküldi őket a kérő kliensnek</li>
 </ul>
-<h2 id="tervezési-minták-sidecar">Tervezési minták: Sidecar</h2>
+<h2>Tervezési minták: Sidecar</h2>
 <p><strong>Kontextus</strong></p>
 <ul>
 <li>az alkalmazások és szolgáltatások gyakran igényelnek kapcsolódó funkciókat
@@ -171,7 +171,7 @@
 <li>ezeket a feladatokat a fő alkalmazással együtt helyezzük el (co-locate)</li>
 <li>de saját folyamatba vagy konténerbe helyezve, egységes felületet biztosítva a platformszolgáltatásokhoz a különböző nyelvek között</li>
 </ul>
-<h2 id="kihívások-i">Kihívások I</h2>
+<h2>Kihívások I</h2>
 <p><strong>Szolgáltatás-optimalizáció</strong></p>
 <ul>
 <li>rengeteg hasonló funkciójú szolgáltatás
@@ -190,7 +190,7 @@
 <li>hogyan konfiguráljuk őket?</li>
 <li>a szolgáltatások elemzése és modellezése segíthet</li>
 </ul>
-<h2 id="kihívások-ii">Kihívások II</h2>
+<h2>Kihívások II</h2>
 <p><strong>Szolgáltatások kezelése</strong></p>
 <ul>
 <li>automatikus skálázás (auto-scaling)
@@ -215,7 +215,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="kihívások-iii">Kihívások III</h2>
+<h2>Kihívások III</h2>
 <p><strong>Monolittól a felhő-natívig (pl.: mikroszolgáltatásokig)</strong></p>
 <ul>
 <li>próbáljuk ki!</li>
@@ -276,16 +276,16 @@
 </li>
 </ul>
 <p><strong>A mi felhő-natív mikroszolgáltatásunk</strong> — ábra: Frontend → API Gateway → Termékek / Kosár-Fizetés / Fizetés / Rendelések szolgáltatások, üzenetsoron keresztül az E-mail szolgáltatáshoz kapcsolódva.</p>
-<h2 id="kihívások-iii-demó-videó">Kihívások III: demó videó</h2>
+<h2>Kihívások III: demó videó</h2>
 <p>Ábra egy edge/felhő videófeldolgozó folyamatról: Képkocka rögzítés → Kicsinyítés → Szürkeárnyalatossá alakítás → Előzetes objektumdetektálás → Vágás → Fő objektumdetektálás → Eredmények összegyűjtése → Címkézés → Vizualizáció, egy Redis edge adattárral és egy Amazon Elastic File System felhő adattárral.</p>
 <hr>
-<h1 id="serverless-számítástechnika">2. Serverless számítástechnika</h1>
-<h2 id="serverless-koncepció">Serverless koncepció</h2>
+<h1>2. Serverless számítástechnika</h1>
+<h2>Serverless koncepció</h2>
 <ul>
 <li>a felhőszolgáltató automatikusan biztosítja (provisions), skálázza és kezeli a kód futtatásához szükséges infrastruktúrát</li>
 <li>a fejlesztők kizárólag a kód írására és telepítésére koncentrálhatnak</li>
 </ul>
-<h2 id="a-fejlesztők-szemszögéből">A fejlesztők szemszögéből</h2>
+<h2>A fejlesztők szemszögéből</h2>
 <ul>
 <li>a fejlesztők kizárólag a kód írására és telepítésére koncentrálhatnak, anélkül hogy a mögöttes infrastruktúrával kellene foglalkozniuk</li>
 <li>a kódot a következő formákban definiálják
@@ -307,7 +307,7 @@
 <li>korlátozott konfigurációs lehetőségek</li>
 <li>használat-alapú (pay-as-you-go) árazás</li>
 </ul>
-<h2 id="a-felhőszolgáltató-szemszögéből">A felhőszolgáltató szemszögéből</h2>
+<h2>A felhőszolgáltató szemszögéből</h2>
 <ul>
 <li>a felhőszolgáltató automatikusan biztosítja, skálázza és kezeli a kód futtatásához szükséges infrastruktúrát</li>
 <li>biztosítás (provisioning)
@@ -335,7 +335,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="serverless-caas">Serverless: CaaS</h2>
+<h2>Serverless: CaaS</h2>
 <p><strong>Container as a Service (CaaS)</strong></p>
 <ul>
 <li>platform konténerek futtatásához</li>
@@ -362,12 +362,12 @@
 </li>
 <li>pl. Kubernetes, AWS ECS</li>
 </ul>
-<h2 id="konténerizáció">Konténerizáció</h2>
+<h2>Konténerizáció</h2>
 <ul>
 <li>A konténerizáció a szoftverkód csomagolása kizárólag a kód futtatásához szükséges operációs rendszer (OS) könyvtáraival és függőségeivel, egyetlen könnyűsúlyú futtatható – konténernek nevezett – egységgé, amely bármely infrastruktúrán következetesen fut. (forrás: IBM definíciója)</li>
 <li>AWS definíciója</li>
 </ul>
-<h2 id="konténerizációs-architektúra">Konténerizációs architektúra</h2>
+<h2>Konténerizációs architektúra</h2>
 <p><strong>Mögöttes IT-infrastruktúra</strong></p>
 <ul>
 <li>fizikai vagy virtuális számítási erőforrások</li>
@@ -390,7 +390,7 @@
 <ul>
 <li>szoftveralkalmazások, amelyek konténerekben futnak</li>
 </ul>
-<h2 id="konténerek-vs-virtuális-gépek">Konténerek vs Virtuális gépek</h2>
+<h2>Konténerek vs Virtuális gépek</h2>
 <p><em>(Ábra: két oszlop – Konténerek: App A + App A → Bins/Libs + Bins/Libs → Container Engine → Host OS → Server; Virtuális gépek: App A + App A → Bins/Libs + Bins/Libs → Guest OS + Guest OS → Hypervisor → Host OS → Server)</em></p>
 <p><strong>Táblázat: Konténerek vs Virtuális gépek</strong></p>
 
@@ -424,7 +424,7 @@
 <td>Több erőforrást használ</td>
 </tr>
 </tbody>
-</table><h2 id="konténerkép-réteges-architektúra">Konténerkép: réteges architektúra</h2>
+</table><h2>Konténerkép: réteges architektúra</h2>
 <ul>
 <li>kép (image): csak olvasható sablonok</li>
 <li>rétegekből épül fel, minden réteg olyan fájlrendszer-változtatásokat képvisel, amelyek fájlokat adnak hozzá, távolítanak el vagy módosítanak</li>
@@ -461,7 +461,7 @@ COPY . .
 # A parancs beállítása az alkalmazás futtatásához
 CMD [ "python", "app.py" ]
 </code></pre>
-<h2 id="konténerkép-réteges-architektúra-a-rétegek-egymásra-rakása">Konténerkép: réteges architektúra (a rétegek egymásra rakása)</h2>
+<h2>Konténerkép: réteges architektúra (a rétegek egymásra rakása)</h2>
 <p><strong>A rétegek egymásra rakása</strong></p>
 <ul>
 <li>tartalom-alapú tárolás és union fájlrendszer:
@@ -479,14 +479,14 @@ CMD [ "python", "app.py" ]
 </li>
 </ul>
 <p><em>(Ábra: Unioning filesystem – Union / Upper layer / Lower layer rétegek fájlokkal illusztrálva)</em></p>
-<h2 id="konténer-motorok-docker">Konténer-motorok: Docker</h2>
+<h2>Konténer-motorok: Docker</h2>
 <p><strong>Docker</strong></p>
 <ul>
 <li>platform konténerek fejlesztésére, buildelésére és futtatására</li>
 <li>alternatív konténer-motorok: Podman, Containerd, CRI-O</li>
 </ul>
 <p><em>Ábra: Docker architektúra (forrás) – Kliens (docker run, docker build, docker pull) → Docker Host (Docker daemon, Images, Containers) → Registry (Images, Extensions, Plugins)</em></p>
-<h2 id="docker-speciális-mérethatékonyság-többlépcsős-build-ekkel">(Docker: Speciális mérethatékonyság többlépcsős build-ekkel)</h2>
+<h2>(Docker: Speciális mérethatékonyság többlépcsős build-ekkel)</h2>
 <pre><code>FROM golang:1.23 AS build
 WORKDIR /src
 COPY &lt;&lt;EOF /src/main.go
@@ -510,7 +510,7 @@ CMD ["/bin/hello"]
 <li>a futtatható állomány másolása az első lépcsőből (COPY --from=build …)</li>
 <li>a részletek a hivatalos dokumentációban találhatók</li>
 </ul>
-<h2 id="serverless-faas">Serverless: FaaS</h2>
+<h2>Serverless: FaaS</h2>
 <p><strong>Function as a Service (FaaS)</strong></p>
 <ul>
 <li>platform „kód" függvényként történő futtatásához</li>
@@ -527,7 +527,7 @@ CMD ["/bin/hello"]
 </li>
 <li>pl. Knative Kubernetes felett, AWS Lambda</li>
 </ul>
-<h2 id="felhő-natív-tervezés-faas-felett">Felhő-natív tervezés FaaS felett</h2>
+<h2>Felhő-natív tervezés FaaS felett</h2>
 <p><strong>FaaS alkalmazások</strong></p>
 <ul>
 <li>a függvények állapotmentesek (stateless)</li>
@@ -559,7 +559,7 @@ CMD ["/bin/hello"]
 </ul>
 </li>
 </ul>
-<h2 id="tervezési-minták-externalized-state">Tervezési minták: Externalized State</h2>
+<h2>Tervezési minták: Externalized State</h2>
 <p><strong>Kontextus</strong></p>
 <ul>
 <li>a függvényeknek állapotot, adatot vagy más információt kell megosztaniuk, amikor az egyik meghívja a másikat</li>
@@ -574,7 +574,7 @@ CMD ["/bin/hello"]
 </ul>
 </li>
 </ul>
-<h2 id="megoldások">Megoldások</h2>
+<h2>Megoldások</h2>
 <p><strong>AWS Lambda</strong></p>
 <ul>
 <li>automatikus skálázás</li>
@@ -603,8 +603,8 @@ CMD ["/bin/hello"]
 </li>
 </ul>
 <hr>
-<h1 id="nyilvános-és-privát-platformok">3. Nyilvános és privát platformok</h1>
-<h2 id="nyilvános-vs-privát-nyílt-forráskódú-platformok">Nyilvános vs privát (nyílt forráskódú) platformok</h2>
+<h1>3. Nyilvános és privát platformok</h1>
+<h2>Nyilvános vs privát (nyílt forráskódú) platformok</h2>
 <p><em>(Ábra: mikroszolgáltatás-architektúra egy fuvarmegosztó alkalmazáshoz – Utas/Sofőr mobilalkalmazás és webes felület, API Gateway, Passenger Management, Driver Management, Billing, Payments, Trip Management, Notification szolgáltatásokkal, forrás: nginx blog)</em></p>
 <p>Ugyanez az ábra kiegészítve:</p>
 <ul>
@@ -613,7 +613,7 @@ CMD ["/bin/hello"]
 <li>az alkalmazás profiljával (Application’s profile – Nginx webszerver, Node.js webalkalmazás, kép-osztályozó alkalmazás illesztett görbékkel)</li>
 <li>egy AI-alapú proaktív skálázási architektúrával (Master node / Worker node, Prometheus, LSTM, AR, HTM, RL modellek egy Controller/HPA rendszerhez kapcsolva)</li>
 </ul>
-<h2 id="nyilvános-platformok">Nyilvános platformok</h2>
+<h2>Nyilvános platformok</h2>
 <p><strong>Szolgáltatók</strong></p>
 <ul>
 <li>Amazon Web Services</li>
@@ -632,7 +632,7 @@ CMD ["/bin/hello"]
 <li>próbáljuk felismerni a többi szolgáltató hasonló szolgáltatásait</li>
 </ul>
 <p><em>(Kép: „CLOUD PROVIDERS EVERYWHERE" – mém)</em></p>
-<h2 id="privát-platformok">Privát platformok</h2>
+<h2>Privát platformok</h2>
 <p><strong>Kubernetes</strong></p>
 <ul>
 <li>nyílt forráskódú konténer-orkesztrációs platform
@@ -648,9 +648,9 @@ CMD ["/bin/hello"]
 <li>nyílt forráskódú felhő-infrastruktúra platform virtuális gépekhez, bare metal gépekhez és konténerekhez</li>
 <li>IaaS platform</li>
 </ul>
-<h2 id="kubernetes-klaszter-architektúra">Kubernetes: klaszter-architektúra</h2>
+<h2>Kubernetes: klaszter-architektúra</h2>
 <p><em>(Ábra: CLUSTER — CONTROL PLANE: cloud-control-manager, etcd, kube-api-server, scheduler, Controller Manager; Node 1 és Node 2: kubelet, kube-proxy, podok, CRI; kapcsolódás a CLOUD PROVIDER API-hoz)</em></p>
-<h2 id="kubernetes-klaszter-komponensek">Kubernetes: klaszter-komponensek</h2>
+<h2>Kubernetes: klaszter-komponensek</h2>
 <p><strong>Vezérlősík (Control plane)</strong></p>
 <ul>
 <li>kube-apiserver
@@ -697,7 +697,7 @@ CMD ["/bin/hello"]
 </ul>
 </li>
 </ul>
-<h2 id="kubernetes-objektumok">Kubernetes: Objektumok</h2>
+<h2>Kubernetes: Objektumok</h2>
 <p><strong>Pod</strong></p>
 <ul>
 <li>a számítás legkisebb telepíthető egysége</li>

@@ -8,11 +8,11 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="stackedit">
-  <div class="stackedit__html"><h1 id="hálózati-forgalom-mérése-csomagrögzítés-flow-export-flow-gyűjtők-monitorozási-felépítés-és-adatelemzés">Hálózati forgalom mérése: Csomagrögzítés, Flow-export, Flow-gyűjtők, Monitorozási felépítés és Adatelemzés</h1>
-<h1 id="rész-–-csomagrögzítés-és-flow-export">1. rész – Csomagrögzítés és Flow-export</h1>
-<h1 id="csomagrögzítés-vs.-flow-export">CSOMAGRÖGZÍTÉS VS. FLOW-EXPORT</h1>
-<h2 id="csomagrögzítés-packet-capture">CSOMAGRÖGZÍTÉS (PACKET CAPTURE)</h2>
+<body>
+  <div><h1>Hálózati forgalom mérése: Csomagrögzítés, Flow-export, Flow-gyűjtők, Monitorozási felépítés és Adatelemzés</h1>
+<h1>1. rész – Csomagrögzítés és Flow-export</h1>
+<h1>CSOMAGRÖGZÍTÉS VS. FLOW-EXPORT</h1>
+<h2>CSOMAGRÖGZÍTÉS (PACKET CAPTURE)</h2>
 <ul>
 <li>minden csomag rögzítése (fejlécek + opcionálisan a hasznos adat/payload)</li>
 <li>a csomagrögzítés a passzív megközelítésen alapul</li>
@@ -34,7 +34,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="csomagrögzítés-előnyei-és-hátrányai">CSOMAGRÖGZÍTÉS ELŐNYEI ÉS HÁTRÁNYAI</h2>
+<h2>CSOMAGRÖGZÍTÉS ELŐNYEI ÉS HÁTRÁNYAI</h2>
 <p><strong>Előnyök:</strong></p>
 <ul>
 <li>a legfinomabb granularitási szinten nyújt információt</li>
@@ -54,7 +54,7 @@
 <li>a tároláshoz és elemzéshez szükséges infrastruktúra költséges</li>
 </ul>
 <p><strong>Nem alkalmas nagysebességű hálózatokban való használatra</strong></p>
-<h2 id="használati-példa--mélycsomag-vizsgálat-deep-packet-inspection">HASZNÁLATI PÉLDA | MÉLYCSOMAG-VIZSGÁLAT (DEEP PACKET INSPECTION)</h2>
+<h2>HASZNÁLATI PÉLDA | MÉLYCSOMAG-VIZSGÁLAT (DEEP PACKET INSPECTION)</h2>
 <ul>
 <li>a mélycsomag-vizsgálat (Deep Packet Inspection, DPI) egy olyan hálózatiforgalom-elemzési technika, amely nemcsak a csomagfejléceket (IP-címek, portok, protokoll) vizsgálja, hanem a hasznos adatot (payload – a csomagon belüli tényleges tartalmat) is</li>
 <li>a tartalmat mintaillesztés (pattern matching), heurisztika vagy gépi tanulás segítségével vizsgálja</li>
@@ -75,12 +75,12 @@
 <li>titkosítási kihívás: HTTPS és VPN esetén a hasznos adat gyakran titkosított, ami korlátozza a DPI képességeit</li>
 </ul>
 <p><strong>Iparági adatok szerint évről évre jelentősen növekszik a titkosított kapcsolatokban rejtőző rosszindulatú forgalom mennyisége.</strong> Ez a tendencia azt mutatja, hogy a mélycsomag-vizsgálat (DPI) önmagában már nem elegendő a biztonság garantálásához. Ennek eredményeként a forgalmi flow-kon és statisztikai elemzésen alapuló módszerek szükséges kiegészítéssé váltak.</p>
-<h2 id="flow-export">FLOW-EXPORT</h2>
+<h2>FLOW-EXPORT</h2>
 <p><strong>Egy flow definíciója:</strong> IP-csomagok olyan halmaza, amelyek egy hálózati megfigyelési ponton haladnak át egy adott időintervallum alatt, és amelyekre igaz, hogy az adott flow-hoz tartozó összes csomag közös tulajdonságokkal rendelkezik.</p>
 <p><img src="https://www.abclinuxu.cz/images/clanky/minarik/netflow-1.png" alt="5tuple"><br>
 <em>(Az ábrán látható flow-kulcsok – forrás/cél IP, forrás/cél port, protokoll – összefoglaló neve: 5-tuple.)</em></p>
 <p>A <strong>flow-export</strong> egy másik passzív monitorozási megközelítés, amelyben a csomagokat flow-kká aggregálják, majd tárolás és elemzés céljából exportálják.</p>
-<h2 id="flow-export-előnyei-és-hátrányai">FLOW-EXPORT ELŐNYEI ÉS HÁTRÁNYAI</h2>
+<h2>FLOW-EXPORT ELŐNYEI ÉS HÁTRÁNYAI</h2>
 <p><strong>Előnyök:</strong></p>
 <ul>
 <li>alkalmas nagysebességű hálózatokban való használatra</li>
@@ -95,7 +95,7 @@
 <li>a flow-adattárak mérete így is könnyen meghaladhatja a több tíz terabájtot</li>
 <li>a hagyományos módszerek nem elegendőek a flow-szintű információ kezeléséhez, feldolgozásához, elemzéséhez és értelmezéséhez (erre lehetséges megoldás gépi tanulás alkalmazása a flow-adatokon forgalom-osztályozásra, anomáliadetektálásra, QoS-optimalizálásra stb.)</li>
 </ul>
-<h2 id="csomagrögzítés-vs.-flow-export-1">CSOMAGRÖGZÍTÉS VS. FLOW-EXPORT</h2>
+<h2>CSOMAGRÖGZÍTÉS VS. FLOW-EXPORT</h2>
 <ul>
 <li>a csomagrögzítés és a flow-export nem zárják ki egymást
 <ul>
@@ -109,7 +109,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="a-dpi-funkciók-emulálása-flow-szintű-információval">A DPI-FUNKCIÓK EMULÁLÁSA FLOW-SZINTŰ INFORMÁCIÓVAL</h2>
+<h2>A DPI-FUNKCIÓK EMULÁLÁSA FLOW-SZINTŰ INFORMÁCIÓVAL</h2>
 <ul>
 <li>a hasznos adattartalom vizsgálata helyett statisztikai és viselkedési jellemzőket vonunk ki és elemzünk a flow-rekordokból</li>
 </ul>
@@ -132,7 +132,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="a-flow-szintű-információ-előnyei-a-hálózati-forgalommenedzsment-ntm-számára">A FLOW-SZINTŰ INFORMÁCIÓ ELŐNYEI A HÁLÓZATI FORGALOMMENEDZSMENT (NTM) SZÁMÁRA</h2>
+<h2>A FLOW-SZINTŰ INFORMÁCIÓ ELŐNYEI A HÁLÓZATI FORGALOMMENEDZSMENT (NTM) SZÁMÁRA</h2>
 <ul>
 <li><strong>Skálázható</strong>
 <ul>
@@ -151,8 +151,8 @@
 </li>
 <li>Ezen előnyök miatt ez a kurzus a flow-szintű információra összpontosít</li>
 </ul>
-<h1 id="internet-protocol-flow-information-export-ipfix">INTERNET PROTOCOL FLOW INFORMATION EXPORT (IPFIX)</h1>
-<h2 id="az-ipfix-internetes-szabvány">AZ IPFIX INTERNETES SZABVÁNY</h2>
+<h1>INTERNET PROTOCOL FLOW INFORMATION EXPORT (IPFIX)</h1>
+<h2>AZ IPFIX INTERNETES SZABVÁNY</h2>
 <ul>
 <li>a flow-szintű mérést általában IPFIX-szel vagy NetFlow-val végzik
 <ul>
@@ -176,7 +176,7 @@
 <li>a flow-rekordok exportálása egy push-alapú mechanizmus, amelyben az adatok az exportálóktól (exporter) a gyűjtőkig (collector) TCP-n, UDP-n vagy SCTP-n keresztül jutnak el</li>
 <li>bármely IPFIX-alapú mérési platform lényeges komponensei az exportáló (exporter) és a gyűjtő (collector)</li>
 </ul>
-<h1 id="flow-szintű-információ-mérési-platform">FLOW-SZINTŰ INFORMÁCIÓ MÉRÉSI PLATFORM</h1>
+<h1>FLOW-SZINTŰ INFORMÁCIÓ MÉRÉSI PLATFORM</h1>
 <ul>
 <li><strong>Internet:</strong> a forgalom forrását jelenti (az az élő hálózat, amelynek csomagjait figyeljük)</li>
 <li><strong>Megfigyelési pont (Observation Point):</strong> ott helyezkedik el a fizikai elágaztató (tap) a linken; itt látjuk először a csomagokat</li>
@@ -186,12 +186,12 @@
 <li><strong>Adatbázis → Elemző:</strong> az elemző lekérdezi az adatbázist (szintén SQL segítségével), hogy elvégezze a szükséges forgalomelemzést (hagyományos, ML-alapú stb.)</li>
 <li><strong>Gyűjtő → Elemző:</strong> egy útvonal lehetővé teszi, hogy a gyűjtő közvetlenül kommunikáljon az elemzővel valós idejű elemzéshez</li>
 </ul>
-<h1 id="csomagmegfigyelés-packet-observation">CSOMAGMEGFIGYELÉS (PACKET OBSERVATION)</h1>
+<h1>CSOMAGMEGFIGYELÉS (PACKET OBSERVATION)</h1>
 <ul>
 <li>a csomagmegfigyelés az a folyamat, amely a vonalról rögzíti a csomagokat, és előfeldolgozza őket a további felhasználásra. Ez tehát kulcsfontosságú a flow-monitorozás számára</li>
 <li>az ábrán a „csomagmintavételezés" és a „csomagszűrés" közötti szaggatott visszacsatolási hurok azt jelzi, hogy ez a két opcionális lépés iteratívan vagy bármilyen sorrendben alkalmazható, a megvalósítástól függően – nem szigorúan a folytonos nyilak által sugallt, egyirányú fentről lefelé haladó sorrendben</li>
 </ul>
-<h2 id="csomagmegfigyelés--alapvető-lépések">CSOMAGMEGFIGYELÉS | ALAPVETŐ LÉPÉSEK</h2>
+<h2>CSOMAGMEGFIGYELÉS | ALAPVETŐ LÉPÉSEK</h2>
 <ul>
 <li><strong>Csomagrögzítés</strong>
 <ul>
@@ -220,7 +220,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="csomagmegfigyelés--opcionális-lépések">CSOMAGMEGFIGYELÉS | OPCIONÁLIS LÉPÉSEK</h2>
+<h2>CSOMAGMEGFIGYELÉS | OPCIONÁLIS LÉPÉSEK</h2>
 <ul>
 <li><strong>Csonkítás (Truncation)</strong>
 <ul>
@@ -273,7 +273,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="csomagmegfigyelés--rögzítési-teljesítmény">CSOMAGMEGFIGYELÉS | RÖGZÍTÉSI TELJESÍTMÉNY</h2>
+<h2>CSOMAGMEGFIGYELÉS | RÖGZÍTÉSI TELJESÍTMÉNY</h2>
 <ul>
 <li>a teljes rögzítési teljesítmény attól függ, mennyi rendszerköltséggel jár a csomagok átadása a hálózati interfészvezérlőtől (NIC) a rögzítő alkalmazás felé</li>
 <li>fő költségtényező: a csomagok átadása NIC → kernel → felhasználói tér között (csomagonkénti overhead). Az operációs rendszerek hálózati veremei csomagonkénti feldolgozást és másolást vezetnek be, ami korlátozza a maximálisan fenntartható rögzítési sebességet
@@ -284,7 +284,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="a-folyamat-felgyorsításának-módszerei--szoftveralapú-optimalizációk">A FOLYAMAT FELGYORSÍTÁSÁNAK MÓDSZEREI | SZOFTVERALAPÚ OPTIMALIZÁCIÓK</h2>
+<h2>A FOLYAMAT FELGYORSÍTÁSÁNAK MÓDSZEREI | SZOFTVERALAPÚ OPTIMALIZÁCIÓK</h2>
 <ul>
 <li><strong>Megszakítás-mérséklés (Interrupt mitigation)</strong>
 <ul>
@@ -311,7 +311,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="a-folyamat-felgyorsításának-módszerei--hardveralapú-optimalizációk">A FOLYAMAT FELGYORSÍTÁSÁNAK MÓDSZEREI | HARDVERALAPÚ OPTIMALIZÁCIÓK</h2>
+<h2>A FOLYAMAT FELGYORSÍTÁSÁNAK MÓDSZEREI | HARDVERALAPÚ OPTIMALIZÁCIÓK</h2>
 <ul>
 <li><strong>Hardveres gyorsítókártyák</strong>
 <ul>
@@ -322,15 +322,15 @@
 </ul>
 </li>
 </ul>
-<h1 id="telepítés--csomagrögzítési-mód">TELEPÍTÉS | CSOMAGRÖGZÍTÉSI MÓD</h1>
-<h2 id="hálózati-elágaztatók-network-taps">HÁLÓZATI ELÁGAZTATÓK (NETWORK TAPS)</h2>
+<h1>TELEPÍTÉS | CSOMAGRÖGZÍTÉSI MÓD</h1>
+<h2>HÁLÓZATI ELÁGAZTATÓK (NETWORK TAPS)</h2>
 <ul>
 <li>megkettőzik az elágaztatón áthaladó teljes forgalmat, és kapcsolatot biztosítanak egy dedikált rögzítőeszköz számára</li>
 <li>a forgalmat vonali sebességgel engedik át, késleltetés bevezetése vagy az adatok módosítása nélkül</li>
 <li>beépített „fail-open" képességgel rendelkeznek, amely biztosítja a forgalom folytonosságát akkor is, ha az elágaztató leáll vagy elveszíti a tápellátást</li>
 <li>további hardverköltséggel jár</li>
 </ul>
-<h2 id="portükrözés-port-mirroring">PORTÜKRÖZÉS (PORT MIRRORING)</h2>
+<h2>PORTÜKRÖZÉS (PORT MIRRORING)</h2>
 <ul>
 <li>a legtöbb csomagtovábbító eszköz képes egy vagy több port forgalmát egy másik, rögzítőeszközhöz kapcsolt portra tükrözni</li>
 <li>nem jár olyan többletköltséggel, mint egy hálózati elágaztató</li>
@@ -342,15 +342,15 @@
 </ul>
 </li>
 </ul>
-<h2 id="hálózati-elágaztatók-vagy-portükrözés">HÁLÓZATI ELÁGAZTATÓK VAGY PORTÜKRÖZÉS</h2>
+<h2>HÁLÓZATI ELÁGAZTATÓK VAGY PORTÜKRÖZÉS</h2>
 <ul>
 <li>nagy megbízhatóságú, nem invazív rögzítéshez elágaztatókat (tap) használjunk</li>
 <li>gyors és olcsó felállításokhoz a tükrözés elfogadható, de bizonyos torzításokkal és kapacitási problémákkal jár</li>
 <li>az elágaztatókat általában megfelelőségi (compliance) vagy biztonságkritikus monitorozás (pl. behatolásészlelés) esetén részesítik előnyben, ahol számít a bizonyíték teljessége és módosíthatatlansága</li>
 <li>a tükrözés marad az alapértelmezett megoldás a vállalati LAN-okban és kisebb laborokban, mivel nem igényel extra hardvert, és tisztán a switch szoftverén keresztül átkonfigurálható</li>
 </ul>
-<h2 id="csomagrögzítési-mód">CSOMAGRÖGZÍTÉSI MÓD</h2>
-<h3 id="mirror-port-porttükrözés">Mirror port (porttükrözés)</h3>
+<h2>CSOMAGRÖGZÍTÉSI MÓD</h2>
+<h3>Mirror port (porttükrözés)</h3>
 <ul>
 <li>nem továbbít hibás, túl hosszú vagy túl rövid kereteket, illetve szabálytalan formátumú csomagokat</li>
 <li>nem továbbítja a VLAN-címkéket</li>
@@ -363,7 +363,7 @@
 <li>nem megfelelő CALEA-hozzáféréshez, megfelelőségi vagy auditvizsgálatokhoz</li>
 <li>a rögzített fájlok problémákat okozhatnak bírósági eljárások során</li>
 </ul>
-<h3 id="network-tap-hálózati-csap">Network tap (hálózati csap)</h3>
+<h3>Network tap (hálózati csap)</h3>
 <ul>
 <li>telepítéséhez szolgáltatáskimaradás szükséges</li>
 <li>a következő kimaradásig a helyén kell hagyni</li>
@@ -371,10 +371,10 @@
 <li>egyetlen meghibásodási ponttá válhat -&gt; beépített „fail-open” (hiba esetén átengedő) funkció</li>
 </ul>
 <p><strong>Az emberek és alkalmazások 99%-a számára a porttükrözés a megfelelőbb megoldás</strong></p>
-<h1 id="flow-exportálók-flow-exporters">FLOW-EXPORTÁLÓK (FLOW EXPORTERS)</h1>
-<h2 id="ipfix-exportáló">IPFIX EXPORTÁLÓ</h2>
+<h1>FLOW-EXPORTÁLÓK (FLOW EXPORTERS)</h1>
+<h2>IPFIX EXPORTÁLÓ</h2>
 <p><img src="https://www.researchgate.net/publication/356247535/figure/fig1/AS:1092566770548736@1637499625083/General-Architecture-for-the-IPFIX-exporter.jpg" alt="ipfix"></p>
-<h2 id="flow-rekordok-karbantartása-maintaining-flow-records">FLOW-REKORDOK KARBANTARTÁSA (MAINTAINING FLOW RECORDS)</h2>
+<h2>FLOW-REKORDOK KARBANTARTÁSA (MAINTAINING FLOW RECORDS)</h2>
 <ul>
 <li>a flow-rekordok karbantartásával kapcsolatos feladatok</li>
 <li><strong>flow-cache feladatok</strong>
@@ -389,11 +389,11 @@
 <li>egy flow-cache jellemzően hash-táblaként valósul meg, amelynek kulcsa a flow 5-tuple-je (vagy annak egy hash-e)</li>
 <li>a flow-cache memóriája véges, ezért nagy terhelés esetén (sok egyidejű flow, vagy egy DDoS-támadás, amely gyorsan sok új flow-t hoz létre) maga a cache válhat szűk keresztmetszetté vagy támadási felületté</li>
 </ul>
-<h2 id="egyirányú-flow-k-uniflows-karbantartása">EGYIRÁNYÚ FLOW-K (UNIFLOWS) KARBANTARTÁSA</h2>
+<h2>EGYIRÁNYÚ FLOW-K (UNIFLOWS) KARBANTARTÁSA</h2>
 <ul>
 <li>az egyirányú flow-k (uniFlow-k) olyan csomagokból állnak, amelyeket az egyik végponttól a másik végpontig küldenek</li>
 </ul>
-<h2 id="flow-lejárata-flow-expiration">FLOW LEJÁRATA (FLOW EXPIRATION)</h2>
+<h2>FLOW LEJÁRATA (FLOW EXPIRATION)</h2>
 <ul>
 <li><strong>Passzív (idle/tétlenségi) timeout</strong>
 <ul>
@@ -441,7 +441,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="gyakorlati-ajánlás">GYAKORLATI AJÁNLÁS</h2>
+<h2>GYAKORLATI AJÁNLÁS</h2>
 <ul>
 <li>az idle/aktív timeout-okat a várható forgalmi mintázatok és az elemzési célok alapján válasszuk meg:
 <ul>
@@ -451,11 +451,11 @@
 </ul>
 </li>
 </ul>
-<h2 id="sablonok-és-adatok-templates-and-data">SABLONOK ÉS ADATOK (TEMPLATES AND DATA)</h2>
+<h2>SABLONOK ÉS ADATOK (TEMPLATES AND DATA)</h2>
 <ul>
 <li>a flow-rekordokat adatrekordok (data records) hordozzák, és ezen adatrekordok struktúráját sablonok (templates) definiálják</li>
 </ul>
-<h2 id="flow-exportálók-áttekintés">FLOW-EXPORTÁLÓK (áttekintés)</h2>
+<h2>FLOW-EXPORTÁLÓK (áttekintés)</h2>
 <p><strong>Kereskedelmi</strong></p>
 <ul>
 <li>Próbák (Probes)
@@ -486,8 +486,8 @@
 <li>YAF</li>
 </ul>
 <hr>
-<h1 id="rész-–-flow-gyűjtők-monitorozási-felépítés-és-adatelemzés">2. rész – Flow-gyűjtők, Monitorozási felépítés és Adatelemzés</h1>
-<h1 id="adatgyűjtés-data-collection">ADATGYŰJTÉS (DATA COLLECTION)</h1>
+<h1>2. rész – Flow-gyűjtők, Monitorozási felépítés és Adatelemzés</h1>
+<h1>ADATGYŰJTÉS (DATA COLLECTION)</h1>
 <ul>
 <li>fogadják, tárolják és előfeldolgozzák a flow-adatokat egy vagy több flow-exportálótól</li>
 <li>az adatgyűjtést egy vagy több gyűjtő folyamat (collecting process) végzi a flow-gyűjtőkön belül</li>
@@ -515,7 +515,7 @@
 <p>minden egyes előfeldolgozási döntés tervezési döntéssé válik, amely formálja a későbbi gépi tanulási modellek vagy downstream elemzések betanítási adatait</p>
 </li>
 </ul>
-<h2 id="a-tárolási-formátumok-típusai">A TÁROLÁSI FORMÁTUMOK TÍPUSAI</h2>
+<h2>A TÁROLÁSI FORMÁTUMOK TÍPUSAI</h2>
 <ul>
 <li><strong>Felejtő (volatile) tárolás</strong>
 <ul>
@@ -530,7 +530,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="a-tartós-tárolás-típusai">A TARTÓS TÁROLÁS TÍPUSAI</h2>
+<h2>A TARTÓS TÁROLÁS TÍPUSAI</h2>
 <ul>
 <li><strong>Sima fájlok (Flat files)</strong>
 <ul>
@@ -555,14 +555,14 @@
 </ul>
 </li>
 </ul>
-<h1 id="ipfix-alapú-monitorozási-felépítés">IPFIX-ALAPÚ MONITOROZÁSI FELÉPÍTÉS</h1>
+<h1>IPFIX-ALAPÚ MONITOROZÁSI FELÉPÍTÉS</h1>
 <p>A hálózati forgalom IPFIX protokollon alapuló monitorozása és elemzése a következő lépésekre bontható:</p>
 <ol>
 <li>A rögzített csomagokból nyert információ (időbélyegzés, mintavételezés, osztályozás stb. után) IPFIX üzenetekbe kerül beágyazásra, és az exportálótól eljut a gyűjtőig.</li>
 <li>A gyűjtő a kapott flow-szintű adatokat egy adatbázisba tárolja, és/vagy közvetlenül elküldi egy elemző alkalmazásnak.</li>
 <li>Az adatbázisból (vagy közvetlenül a gyűjtőtől) nyert adatok különböző módszerekkel (pl. gépi tanulással) elemezhetők, és számos különböző formában megjeleníthetők.</li>
 </ol>
-<h1 id="adatelemzés-data-analysis">ADATELEMZÉS (DATA ANALYSIS)</h1>
+<h1>ADATELEMZÉS (DATA ANALYSIS)</h1>
 <ul>
 <li>az adatelemzés az utolsó szakasz egy flow-monitorozási felépítésben</li>
 <li>a flow-adat lényegében táblázatos, időbélyeggel ellátott információ nagy mennyiségéből áll</li>
@@ -570,21 +570,21 @@
 <li>minden oszlop egy jellemző (feature) (numerikus, mint pl. a byte-szám, vagy kategorikus, mint pl. a protokoll)</li>
 <li>megjegyzés: ez pontosan az a táblázatos formátum, amelyet a legtöbb klasszikus gépitanulás-könyvtár (scikit-learn, XGBoost) bemenetként vár</li>
 </ul>
-<h2 id="az-adatelemzés-alkalmazási-területei">AZ ADATELEMZÉS ALKALMAZÁSI TERÜLETEI</h2>
+<h2>AZ ADATELEMZÉS ALKALMAZÁSI TERÜLETEI</h2>
 <p>Az adatelemzésnek három alkalmazási területe van:</p>
 <ul>
 <li><strong>Flow-elemzés és jelentéskészítés:</strong> nagyrészt leíró statisztikák/irányítópultok (dashboard-ok) (vagy legfeljebb enyhe ML, pl. egyszerű sávszélesség-trend-előrejelzés)</li>
 <li><strong>Fenyegetésészlelés:</strong> osztályozás/anomáliadetektálás (felügyelt vagy felügyelet nélküli)</li>
 <li><strong>Teljesítménymonitorozás:</strong> pl. regresszió/időbeli sor-előrejelzés (folytonos metrikák, mint a Round-Trip Time (RTT) előrejelzése vagy mérése)</li>
 </ul>
-<h2 id="flow-elemzés-és-jelentéskészítés">FLOW-ELEMZÉS ÉS JELENTÉSKÉSZÍTÉS</h2>
+<h2>FLOW-ELEMZÉS ÉS JELENTÉSKÉSZÍTÉS</h2>
 <p>Az alkalmazások jellemzően három funkciót biztosítanak:</p>
 <ul>
 <li>flow-adatok böngészése és szűrése</li>
 <li>statisztikai áttekintés</li>
 <li>jelentéskészítés és riasztás</li>
 </ul>
-<h2 id="fenyegetésészlelés-threat-detection">FENYEGETÉSÉSZLELÉS (THREAT DETECTION)</h2>
+<h2>FENYEGETÉSÉSZLELÉS (THREAT DETECTION)</h2>
 <ul>
 <li>a különböző támadások – mint például az elosztott szolgáltatásmegtagadási (DDoS) támadás, hálózati portscan, féregterjedés és botnet-kommunikáció – közös jellemzője, hogy olyan metrikákra hatnak, amelyek közvetlenül levezethetők a flow-rekordokból
 <ul>
@@ -597,7 +597,7 @@
 <li>a flow-információ nem támaszkodik hasznos adattartalomra; titkosított környezetben is működik</li>
 <li>a flow-információ könnyűsúlyú jellege lehetővé teszi a gerinchálózati (backbone) linkek elemzését</li>
 </ul>
-<h2 id="secure-shell-ssh-szótár-támadás">SECURE SHELL (SSH) SZÓTÁR-TÁMADÁS</h2>
+<h2>SECURE SHELL (SSH) SZÓTÁR-TÁMADÁS</h2>
 <ul>
 <li><strong>SSH szótár-támadás:</strong> a szótár-alapú támadás automatizálja a jelszó kitalálásának folyamatát, egy gondosan összeállított értéklista (valódi szavak, kiszivárgott jelszavak, gyakori karaktermintázatok stb.) végigpróbálásával
 <ul>
@@ -619,7 +619,7 @@
 <li>ennek a szakasznak a befejezése után a támadó elindítja a brute-force felhasználónév/jelszó-kitaláló támadást (brute-force szakasz). Ebben a szakaszban a hálózat hosztjainak csak egy kis részhalmaza érintett. Ez a szakasz a második 1000 másodperces blokknak felel meg, és a támadó és az áldozatok közötti magas interakció jellemzi.</li>
 <li>végül, a támadás kezdete óta kb. 2000 másodperccel a brute-force szakasz véget ér.</li>
 </ul>
-<h2 id="ssh-szótár-támadás-–-a-csomagokflow-arány-időbeli-alakulása">SSH SZÓTÁR-TÁMADÁS – A CSOMAGOK/FLOW ARÁNY IDŐBELI ALAKULÁSA</h2>
+<h2>SSH SZÓTÁR-TÁMADÁS – A CSOMAGOK/FLOW ARÁNY IDŐBELI ALAKULÁSA</h2>
 <ul>
 <li>a felderítési szakaszt mindössze néhány, flow-nkénti csomag jellemzi, átlagosan 1 és 1,5 között
 <ul>
@@ -633,12 +633,12 @@
 </li>
 <li>e viselkedés megértése segít a hálózatbiztonsági rendszernek anomáliadetektálási módszerekkel felismerni azt, és így megelőzni a támadást</li>
 </ul>
-<h2 id="teljesítménymonitorozás-performance-monitoring">TELJESÍTMÉNYMONITOROZÁS (PERFORMANCE MONITORING)</h2>
+<h2>TELJESÍTMÉNYMONITOROZÁS (PERFORMANCE MONITORING)</h2>
 <ul>
 <li>a teljesítménymonitorozás célja a hálózaton futó szolgáltatások állapotának megfigyelése (mennyire teljesít jól egy szolgáltatás a felhasználói számára)</li>
 <li>egy alkalmazáscsoport olyan teljesítménymetrikákat becsül, mint a szolgáltatás rendelkezésre állása, az oda-vissza úti idő (Round Trip Time, RTT) vagy az egyirányú késleltetés (One Way Delay, OWD), az IPFIX/NetFlow által már exportált információelemek (Information Elements, IE – időbélyegek, sorszámok stb.) utófeldolgozásával, külön aktív próbaeszköz (active-probing tool) igénye nélkül</li>
 </ul>
-<h2 id="rtt-vs.-owd">RTT VS. OWD</h2>
+<h2>RTT VS. OWD</h2>
 <ul>
 <li><strong>RTT (oda-vissza úti idő, Round Trip Time):</strong> az az idő, ami egy csomag elküldésétől a válasz megérkezéséig telik el
 <ul>
@@ -659,7 +659,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="óraszinkronizáció-az-owd-számításhoz">ÓRASZINKRONIZÁCIÓ AZ OWD SZÁMÍTÁSHOZ</h2>
+<h2>ÓRASZINKRONIZÁCIÓ AZ OWD SZÁMÍTÁSHOZ</h2>
 <ul>
 <li>Ha A és B órája aszinkron:
 <ul>
@@ -672,13 +672,13 @@
 </ul>
 </li>
 </ul>
-<h1 id="gyakori-buktatók-common-pitfalls">GYAKORI BUKTATÓK (COMMON PITFALLS)</h1>
+<h1>GYAKORI BUKTATÓK (COMMON PITFALLS)</h1>
 <ul>
 <li>a flow-exportáló túlterhelése</li>
 <li>a transzport túlterhelése</li>
 <li>a flow-gyűjtő túlterhelése</li>
 </ul>
-<h2 id="a-flow-exportáló-túlterhelése">A FLOW-EXPORTÁLÓ TÚLTERHELÉSE</h2>
+<h2>A FLOW-EXPORTÁLÓ TÚLTERHELÉSE</h2>
 <ul>
 <li>a flow-exportálók flow-cache-ei általában fix méretűek</li>
 <li>ha ez a méret túl kicsinek bizonyul, flow-adatvesztés vagy alacsony teljesítmény lehet az eredmény</li>
@@ -690,7 +690,7 @@
 </li>
 <li>az aktív és idle timeout-okat a lehető legnagyobb mértékben betartják, amíg a flow-cache kihasználtsága meg nem halad egy küszöböt (pl. 90%-ot). Ekkor vészhelyzeti lejárat lép életbe, amely idő előtt lejáratja a cache-bejegyzéseket, hogy felszabadítsa a flow-cache-t, és lehetővé tegye új bejegyzések beszúrását. Ez több flow-rekordot eredményez, és olyan flow-adatokat, amelyek nem konzisztensen járnak le, ami hatással lehet a következő, Adatelemzés szakaszra</li>
 </ul>
-<h2 id="a-transzport-túlterhelése">A TRANSZPORT TÚLTERHELÉSE</h2>
+<h2>A TRANSZPORT TÚLTERHELÉSE</h2>
 <ul>
 <li>gyakori, hogy a flow-exportálók 10 Gbps-os vagy magasabb sebességű linkekről exportálnak adatokat 1 Gbps-os linkeken keresztül. Ennek jellemzően az az oka, hogy a flow-adatot az exportáló menedzsment-interfészén (amely rendszerint 1 Gbps-os vonali sebességű) keresztül küldik a gyűjtőknek, valamint hogy a flow-gyűjtők gyakran „hagyományos" fájlszerverek, amelyek nincsenek speciális, nagysebességű hálózati interfészekkel felszerelve</li>
 <li>a flow-export által elért adatcsökkentésnek köszönhetően a nagysebességű linkekről exportált flow-adatok általában veszteség nélkül exportálhatók kisebb linkeken keresztül is</li>
@@ -702,7 +702,7 @@
 <li>egy flow definíciója miatt az ilyen típusú forgalom sok új flow-t eredményez, mivel a flow-kulcs minden egyes csomagnál változik</li>
 <li>a flow-nkénti kiválasztott információelemek (IE) számától függően a rendszerint elért adataggregáció semleges méretű exportálássá válhat (azaz az exportált adat ugyanakkora méretű, mint a figyelt adat), vagy akár adatnövekedéssé is</li>
 </ul>
-<h2 id="a-flow-gyűjtő-túlterhelése">A FLOW-GYŰJTŐ TÚLTERHELÉSE</h2>
+<h2>A FLOW-GYŰJTŐ TÚLTERHELÉSE</h2>
 <ul>
 <li>egy tipikus flow-monitorozási felépítés szakaszai közül az adatgyűjtés kapja általában a legkevesebb figyelmet, bár egy nem optimális beállítás súlyos, és gyakran észrevétlen adatvesztéshez vezethet</li>
 <li>rendellenes helyzetekben a beérkező flow-rekordok száma akár meg is duplázódhat, vagy ennél is nagyobb mértékben nőhet</li>

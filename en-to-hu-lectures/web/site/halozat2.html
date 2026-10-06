@@ -8,9 +8,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="stackedit">
-  <div class="stackedit__html"><h1 id="hálózatok-intro">Hálózatok intro</h1>
-<h2 id="az-internet-„csavarok-és-anyacsavarok-nézet">AZ INTERNET: „CSAVAROK ÉS ANYACSAVAROK" NÉZET</h2>
+<body>
+  <div><h1>Hálózatok intro</h1>
+<h2>AZ INTERNET: „CSAVAROK ÉS ANYACSAVAROK" NÉZET</h2>
 <p>Több milliárd összekapcsolt számítástechnikai eszköz:</p>
 <ul>
 <li><strong>hosztok</strong> = végrendszerek</li>
@@ -66,7 +66,7 @@
 </li>
 </ul>
 <p><em>(Ábra: ugyanaz a hálózati topológia, mint az előző dián, kiemelve a szolgáltatási réteget)</em></p>
-<h2 id="mi-az-a-protokoll">MI AZ A PROTOKOLL?</h2>
+<h2>MI AZ A PROTOKOLL?</h2>
 <p>Egy emberi protokoll és egy számítógépes hálózati protokoll:</p>
 <p><em>(Ábra: az emberi köszönés-időkérés folyamat mellett a számítógépes megfelelője: TCP kapcsolatkérés → TCP kapcsolatválasz → GET <a href="http://gaia.cs.umass.edu/kurose_ross">http://gaia.cs.umass.edu/kurose_ross</a> → )</em></p>
 <hr>
@@ -88,8 +88,8 @@
 </ul>
 <p>A <strong>protokollok</strong> definiálják a hálózati entitások között küldött és fogadott üzenetek <strong>formátumát, sorrendjét</strong>, valamint az üzenetek küldésekor és fogadásakor végrehajtandó cselekvéseket.</p>
 <hr>
-<h1 id="hálózati-szél-network-edge">HÁLÓZATI SZÉL (NETWORK EDGE)</h1>
-<h2 id="közelebbről-az-internet-struktúrája">KÖZELEBBRŐL AZ INTERNET STRUKTÚRÁJA</h2>
+<h1>HÁLÓZATI SZÉL (NETWORK EDGE)</h1>
+<h2>KÖZELEBBRŐL AZ INTERNET STRUKTÚRÁJA</h2>
 <p><strong>Hálózati szél (network edge):</strong></p>
 <ul>
 <li>hosztok: kliensek és szerverek</li>
@@ -105,7 +105,7 @@
 <li>hálózatok hálózata</li>
 </ul>
 <p><em>(Ábra: mobilhálózat, országos/globális ISP, helyi/regionális ISP, otthoni hálózat, vállalati hálózat, tartalomszolgáltatói hálózat, adatközpont-hálózat topológiája)</em></p>
-<h2 id="hozzáférési-hálózatok-és-fizikai-közegek">HOZZÁFÉRÉSI HÁLÓZATOK ÉS FIZIKAI KÖZEGEK</h2>
+<h2>HOZZÁFÉRÉSI HÁLÓZATOK ÉS FIZIKAI KÖZEGEK</h2>
 <p><strong>K: Hogyan csatlakoznak a végrendszerek a szélső (edge) routerhez?</strong></p>
 <ul>
 <li>lakossági hozzáférési hálózatok</li>
@@ -113,7 +113,7 @@
 <li>mobil hozzáférési hálózatok (WiFi, 4G/5G)</li>
 </ul>
 <p><em>(Ugyanaz a topológiaábra)</em></p>
-<h2 id="hozzáférési-hálózatok-otthoni-hálózatok">HOZZÁFÉRÉSI HÁLÓZATOK: OTTHONI HÁLÓZATOK</h2>
+<h2>HOZZÁFÉRÉSI HÁLÓZATOK: OTTHONI HÁLÓZATOK</h2>
 <p><em>(Ábra: otthoni hálózat felépítése)</em></p>
 <ul>
 <li>vezeték nélküli és vezetékes eszközök</li>
@@ -127,7 +127,7 @@
 <li>vezetékes Ethernet (1 Gbps)</li>
 <li>a fejállomáshoz (headend) vagy a központi irodához kapcsolódik</li>
 </ul>
-<h2 id="hozzáférési-hálózatok-vállalati-hálózatok">HOZZÁFÉRÉSI HÁLÓZATOK: VÁLLALATI HÁLÓZATOK</h2>
+<h2>HOZZÁFÉRÉSI HÁLÓZATOK: VÁLLALATI HÁLÓZATOK</h2>
 <p><em>(Ábra: vállalati hálózat felépítése – intézményi router, Ethernet switch, intézményi levelező- és webszerverek, kapcsolat az ISP-hez/internethez)</em></p>
 <ul>
 <li>vállalatok, egyetemek stb.</li>
@@ -138,13 +138,13 @@
 </ul>
 </li>
 </ul>
-<h2 id="hozzáférési-hálózatok-adatközponti-hálózatok">HOZZÁFÉRÉSI HÁLÓZATOK: ADATKÖZPONTI HÁLÓZATOK</h2>
+<h2>HOZZÁFÉRÉSI HÁLÓZATOK: ADATKÖZPONTI HÁLÓZATOK</h2>
 <ul>
 <li>nagy sávszélességű linkek (10-100 Gbps nagyságrendben) kötnek össze több száz–több ezer szervert egymással és az internettel</li>
 </ul>
 <p><em>(Ugyanaz a topológiaábra)</em></p>
 <p><em>Forrás: Massachusetts Green High Performance Computing Center (<a href="http://mghpcc.org">mghpcc.org</a>)</em></p>
-<h2 id="linkek-fizikai-közegek">LINKEK: FIZIKAI KÖZEGEK</h2>
+<h2>LINKEK: FIZIKAI KÖZEGEK</h2>
 <ul>
 <li>a <strong>bit</strong> a jeladó/vevő párok között terjed</li>
 <li>a <strong>fizikai link</strong> az, ami a jeladó és a vevő között helyezkedik el</li>
@@ -239,8 +239,8 @@
 </li>
 </ul>
 <hr>
-<h2 id="hálózati-mag-network-core">HÁLÓZATI MAG (NETWORK CORE)</h2>
-<h2 id="a-hálózati-mag">A HÁLÓZATI MAG</h2>
+<h2>HÁLÓZATI MAG (NETWORK CORE)</h2>
+<h2>A HÁLÓZATI MAG</h2>
 <ul>
 <li>összekapcsolt routerek hálózata (mesh)</li>
 <li><strong>csomagkapcsolás (packet-switching):</strong> a hosztok az alkalmazási rétegbeli üzeneteket csomagokra bontják
@@ -249,7 +249,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="a-hálózati-mag-két-kulcsfontosságú-funkciója">A HÁLÓZATI MAG KÉT KULCSFONTOSSÁGÚ FUNKCIÓJA</h2>
+<h2>A HÁLÓZATI MAG KÉT KULCSFONTOSSÁGÚ FUNKCIÓJA</h2>
 <p><strong>Továbbítás (forwarding):</strong></p>
 <ul>
 <li>más néven „kapcsolás" (switching)</li>
@@ -262,11 +262,11 @@
 <li>útválasztási algoritmusok</li>
 </ul>
 <p><em>(Ábra: útválasztási algoritmus → helyi továbbítási táblázat, amely a fejlécértékeket kimeneti linkekhez rendeli, pl. 0100→3, 0101→2, 0111→2, 1001→1)</em></p>
-<h2 id="útválasztás-routing">útválasztás (routing)</h2>
+<h2>útválasztás (routing)</h2>
 <p><em>(Illusztrációs dia – útválasztás vizuális bemutatása)</em></p>
-<h2 id="továbbítás-forwarding">továbbítás (forwarding)</h2>
+<h2>továbbítás (forwarding)</h2>
 <p><em>(Illusztrációs dia – továbbítás vizuális bemutatása)</em></p>
-<h2 id="az-internet-struktúrája-„hálózatok-hálózata">AZ INTERNET STRUKTÚRÁJA: „HÁLÓZATOK HÁLÓZATA"</h2>
+<h2>AZ INTERNET STRUKTÚRÁJA: „HÁLÓZATOK HÁLÓZATA"</h2>
 <ul>
 <li>a hosztok hozzáférési internetszolgáltatókon (ISP-ken) keresztül csatlakoznak az internethez</li>
 <li>a hozzáférési ISP-knek is összekapcsoltnak kell lenniük
@@ -308,8 +308,8 @@
 <li>„tier-1" kereskedelmi ISP-k (pl. Level 3, Sprint, AT&amp;T, NTT), nemzeti és nemzetközi lefedettséggel</li>
 <li>tartalomszolgáltatói hálózatok (pl. Google, Facebook): privát hálózat, amely az adatközpontjaikat köti az internethez, gyakran megkerülve a tier-1 és regionális ISP-ket</li>
 </ul>
-<h1 id="protokollok">Protokollok</h1>
-<h2 id="protokoll-„rétegek-és-referenciamodellek">PROTOKOLL „RÉTEGEK" ÉS REFERENCIAMODELLEK</h2>
+<h1>Protokollok</h1>
+<h2>PROTOKOLL „RÉTEGEK" ÉS REFERENCIAMODELLEK</h2>
 <p>A hálózatok összetettek, sok „darabból" állnak:</p>
 <ul>
 <li>hosztok (végpontok)</li>
@@ -324,7 +324,7 @@
 <li>és/vagy a róla folytatott tárgyalásunkat?</li>
 </ul>
 <p><em>James F. Kuros – Computer Networking A Top-Down Approach, 9. kiadás, 2025</em></p>
-<h2 id="példa-a-légi-utazás-szervezése">PÉLDA: A LÉGI UTAZÁS SZERVEZÉSE</h2>
+<h2>PÉLDA: A LÉGI UTAZÁS SZERVEZÉSE</h2>
 <p>Az utas és a poggyász végponttól végpontig tartó szállítása</p>
 <p><strong>Odaút:</strong></p>
 <ul>
@@ -361,7 +361,7 @@
 <li>a saját, rétegen belüli tevékenységei révén</li>
 <li>az alatta lévő réteg által nyújtott szolgáltatásokra támaszkodva</li>
 </ul>
-<h2 id="miért-rétegezünk">MIÉRT RÉTEGEZÜNK?</h2>
+<h2>MIÉRT RÉTEGEZÜNK?</h2>
 <p>Megközelítés összetett rendszerek tervezéséhez/tárgyalásához:</p>
 <ul>
 <li>az explicit struktúra lehetővé teszi a rendszer részei közötti kapcsolatok azonosítását
@@ -376,7 +376,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="rétegzett-internet-protokollverem">RÉTEGZETT INTERNET PROTOKOLLVEREM</h2>
+<h2>RÉTEGZETT INTERNET PROTOKOLLVEREM</h2>
 <ul>
 <li><strong>alkalmazási réteg (application):</strong> hálózati alkalmazások támogatása
 <ul>
@@ -401,7 +401,7 @@
 <li><strong>fizikai réteg (physical):</strong> bitek „a vezetéken"</li>
 </ul>
 <p><em>(A rétegek egymásra épülő oszlopként: alkalmazás, szállítás, hálózat, adatkapcsolat, fizikai)</em></p>
-<h2 id="szolgáltatások-rétegzés-és-beágyazás-encapsulation">SZOLGÁLTATÁSOK, RÉTEGZÉS ÉS BEÁGYAZÁS (ENCAPSULATION)</h2>
+<h2>SZOLGÁLTATÁSOK, RÉTEGZÉS ÉS BEÁGYAZÁS (ENCAPSULATION)</h2>
 <p><strong>1. lépés – alkalmazási réteg</strong> Az alkalmazás üzeneteket cserél, hogy megvalósítson egy alkalmazási szolgáltatást, a szállítási réteg szolgáltatásait felhasználva.</p>
 <ul>
 <li>Forrás és cél között: <strong>M</strong> (üzenet)</li>
@@ -431,7 +431,7 @@
 <li>Forrás és cél között: <strong>Hl | Hn | Ht | M</strong></li>
 <li>az adatkapcsolati réteg protokollja beágyazza a [Hn | Ht | M] hálózati datagramot egy adatkapcsolati réteg fejléccel (Hl), így létrehozva egy adatkapcsolati rétegbeli <strong>keretet</strong> (frame)</li>
 </ul>
-<h2 id="beágyazás-encapsulation">BEÁGYAZÁS (ENCAPSULATION)</h2>
+<h2>BEÁGYAZÁS (ENCAPSULATION)</h2>
 <p><strong>Matrjoska babák (egymásba rakható babák)</strong></p>
 <p>Ahogy egy matrjoska baba a következőnél kisebbet rejti magában, úgy tartalmazza minden réteg egysége a felette lévő réteg egységét:</p>
 <ul>
@@ -441,7 +441,7 @@
 <li><strong>keret (frame)</strong></li>
 </ul>
 <p><em>(forrás: <a href="https://dribbble.com/shots/7182188-Babushka-Boi">https://dribbble.com/shots/7182188-Babushka-Boi</a>)</em></p>
-<h2 id="szolgáltatások-rétegzés-és-beágyazás-összefoglaló-ábra">SZOLGÁLTATÁSOK, RÉTEGZÉS ÉS BEÁGYAZÁS: összefoglaló ábra</h2>
+<h2>SZOLGÁLTATÁSOK, RÉTEGZÉS ÉS BEÁGYAZÁS: összefoglaló ábra</h2>
 <p>A forrás oldalon lefelé haladva a rétegeken, minden réteg hozzáadja a saját fejlécét:</p>
 <ul>
 <li>üzenet: <strong>M</strong></li>
@@ -450,7 +450,7 @@
 <li>keret: <strong>Hl | Hn | Ht | M</strong></li>
 </ul>
 <p>A célállomáson felfelé haladva a rétegeken, minden réteg leválasztja a saját fejlécét, amíg vissza nem jutunk az eredeti <strong>M</strong> üzenethez.</p>
-<h2 id="isoosi-referenciamodell">ISO/OSI REFERENCIAMODELL</h2>
+<h2>ISO/OSI REFERENCIAMODELL</h2>
 <p>Két réteg, amely nem található meg az internetes protokollveremben!</p>
 <ul>
 <li><strong>megjelenítési réteg (presentation):</strong> lehetővé teszi az alkalmazások számára az adatok jelentésének értelmezését, pl. titkosítás, tömörítés, géptől függő konvenciók</li>
@@ -463,7 +463,7 @@
 </li>
 </ul>
 <p><strong>A hétrétegű OSI/ISO referenciamodell:</strong> alkalmazás – megjelenítés – viszony – szállítás – hálózat – adatkapcsolat – fizikai</p>
-<h2 id="beágyazás-végponttól-végpontig-terjedő-nézet">BEÁGYAZÁS: VÉGPONTTÓL VÉGPONTIG TERJEDŐ NÉZET</h2>
+<h2>BEÁGYAZÁS: VÉGPONTTÓL VÉGPONTIG TERJEDŐ NÉZET</h2>
 <p>A forrás gép (alkalmazás → szállítás → hálózat → adatkapcsolat → fizikai rétegen) elküldi a keretet (Hl | Hn | Ht | M) egy <strong>switch</strong>-nek (amely csak az adatkapcsolati és fizikai réteget dolgozza fel), majd egy <strong>routernek</strong> (amely a hálózati, adatkapcsolati és fizikai réteget dolgozza fel, és újra becsomagolja a keretet a következő ugráshoz).</p>
 <p>A célgép fogadja a keretet, és a rétegeken felfelé haladva sorban leválasztja a fejléceket (Hl, majd Hn, majd Ht), amíg vissza nem kapja az eredeti <strong>M</strong> üzenetet az alkalmazási rétegben.</p>
 <ul>
@@ -473,8 +473,8 @@
 <li>keret: Hl | Hn | Ht | M</li>
 </ul>
 <hr>
-<h1 id="hálózat--és-forgalommenedzsment">Hálózat- és forgalommenedzsment</h1>
-<h2 id="motiváció">MOTIVÁCIÓ</h2>
+<h1>Hálózat- és forgalommenedzsment</h1>
+<h2>MOTIVÁCIÓ</h2>
 <p><em>Ábra: az internet részleges térképe 2005-ből</em></p>
 <ul>
 <li>csomópontok (vertices) – hasonló IP-vel rendelkező eszközök csoportjai</li>
@@ -490,7 +490,7 @@
 <li>több mint 5 millió él</li>
 <li>kb. 50 millió hopszám (hop count)</li>
 </ul>
-<h2 id="motiváció-a-monitorozásra">MOTIVÁCIÓ A MONITOROZÁSRA</h2>
+<h2>MOTIVÁCIÓ A MONITOROZÁSRA</h2>
 <ul>
 <li>A hálózati forgalom mérésének jelentősége számos hálózattal kapcsolatos tevékenységben megmutatkozik:
 <ul>
@@ -502,7 +502,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="hálózatmonitorozás">HÁLÓZATMONITOROZÁS</h2>
+<h2>HÁLÓZATMONITOROZÁS</h2>
 <ul>
 <li>a hálózatmonitorozás egy olyan rendszer tevékenységét jelenti, amely folyamatosan nyomon követi a hálózatot és annak működését
 <ul>
@@ -513,14 +513,14 @@
 <li>egy hálózatmonitorozó rendszer olyan komponensek együttese, amelyek a hálózati forgalmi adatok gyűjtésére, (valós idejű) feldolgozására és elemzésére szolgálnak (beleértve a statisztikát, gépi tanulást, mesterséges intelligenciát is)</li>
 <li>a hálózatmonitorozás nagymértékben függ a hálózati tulajdonságok mérésétől</li>
 </ul>
-<h2 id="hálózatmonitorozó-rendszerek">HÁLÓZATMONITOROZÓ RENDSZEREK</h2>
+<h2>HÁLÓZATMONITOROZÓ RENDSZEREK</h2>
 <p><em>Ábra: monitorozó rendszerek általános architektúrája</em></p>
 <p>A folyamat: a felhőben lévő eszközök (szerver, router, adatbázis) adatait az <strong>adatgyűjtés (Data Collection)</strong> komponens gyűjti össze, amely</p>
 <ul>
 <li>egy <strong>adatbázisba (Database)</strong> táplálja be az adatokat, amelyből statisztikák, grafikonok stb. készülnek, és</li>
 <li>közvetlenül továbbítja az információt az <strong>adminisztráció / riasztás / értesítések (Administration, Alert, Notifications)</strong> komponensnek. Az adminisztrációs komponens <strong>beavatkozást (Intervention)</strong> kezdeményezhet a monitorozott felhő/eszközök felé.</li>
 </ul>
-<h2 id="hálózati-tulajdonságok">HÁLÓZATI TULAJDONSÁGOK</h2>
+<h2>HÁLÓZATI TULAJDONSÁGOK</h2>
 <ul>
 <li>fizikai komponensek tulajdonságai
 <ul>
@@ -538,14 +538,14 @@
 </ul>
 </li>
 </ul>
-<h2 id="hálózati-forgalom">HÁLÓZATI FORGALOM</h2>
+<h2>HÁLÓZATI FORGALOM</h2>
 <ul>
 <li>tekinthető alapvető információegységek (bitek, byte-ok, oktettek stb.) gyűjteményének</li>
 <li>utalhat bármilyen fajta továbbított információra is: videó, hang, adat, vezérlőüzenetek stb.</li>
 <li>csomagkapcsolt hálózatokban az információ több darabban kerül továbbításra, amelyek különböző formákat ölthetnek: keretek, csomagok, szegmensek, adatok stb.</li>
 <li>a két végpont közötti információcsere során keletkező csomagokat <strong>flow</strong>-nak (adatfolyamnak) nevezzük</li>
 </ul>
-<h2 id="a-forgalmi-tulajdonságok-mérése">A FORGALMI TULAJDONSÁGOK MÉRÉSE</h2>
+<h2>A FORGALMI TULAJDONSÁGOK MÉRÉSE</h2>
 <ul>
 <li><strong>belső entitások</strong> – jellemzően beépített mechanizmusok
 <ul>
@@ -571,13 +571,13 @@
 </ul>
 </li>
 </ul>
-<h2 id="aktív-mérés">AKTÍV MÉRÉS</h2>
+<h2>AKTÍV MÉRÉS</h2>
 <p><em>Ábra: aktív mérési forgatókönyv</em></p>
 <p>A kommunikáció <strong>forrása</strong> és <strong>célja</strong> között zajlik a hálózati forgalom. Az aktív méréshez a hálózaton belül próba-csomagokat (probe packets) <strong>generálnak</strong>, majd ezeket egy másik ponton <strong>gyűjtik</strong> (collecting), így mérve a hálózat viselkedését.</p>
-<h2 id="passzív-mérés">PASSZÍV MÉRÉS</h2>
+<h2>PASSZÍV MÉRÉS</h2>
 <p><em>Ábra: passzív mérési forgatókönyv</em></p>
 <p>A kommunikáció <strong>forrása</strong> és <strong>célja</strong> között zajlik a hálózati forgalom. Passzív mérés esetén egy hálózati elem (pl. egy router mellett elhelyezett gép) <strong>adatokat gyűjt a már létező forgalomból</strong>, anélkül hogy bármilyen saját csomagot generálna.</p>
-<h2 id="csomagrögzítés-packet-capture">CSOMAGRÖGZÍTÉS (PACKET CAPTURE)</h2>
+<h2>CSOMAGRÖGZÍTÉS (PACKET CAPTURE)</h2>
 <ul>
 <li>a passzív megközelítésen alapul</li>
 <li>két fő komponenssel rendelkezik:
@@ -598,7 +598,7 @@
 </li>
 </ul>
 <p><em>Ábra: csomagrögzítés libpcap-pal</em> – Hardver (hálózati interfészkártya, NIC) → Kernel tér (NIC vezérlő, kernel protokoll, socket) → Felhasználói tér (libpcap, csomagrögzítő alkalmazás)</p>
-<h2 id="csomagrögzítés-előnyök-és-hátrányok">CSOMAGRÖGZÍTÉS: előnyök és hátrányok</h2>
+<h2>CSOMAGRÖGZÍTÉS: előnyök és hátrányok</h2>
 <p><strong>ELŐNYÖK</strong></p>
 <ul>
 <li>a legfinomabb granularitási szinten nyújt információt</li>
@@ -618,7 +618,7 @@
 <li>a tároláshoz és elemzéshez szükséges infrastruktúra költséges</li>
 </ul>
 <p><strong>nem alkalmas nagysebességű hálózatokban való használatra</strong></p>
-<h2 id="flow-export">FLOW-EXPORT</h2>
+<h2>FLOW-EXPORT</h2>
 <p><strong>Egy flow definíciója:</strong> IP-csomagok olyan halmaza, amelyek egy hálózati megfigyelési ponton haladnak át egy adott időintervallum alatt, és amelyekre igaz, hogy az adott flow-hoz tartozó összes csomag közös tulajdonságokkal rendelkezik.</p>
 <p><em>Ábra: két router közötti forgalomból flow-adatok kinyerése, mezők:</em></p>
 <ul>
@@ -631,13 +631,13 @@
 <li>egyéb (Others)</li>
 </ul>
 <p>A <strong>flow-export</strong> egy másik passzív monitorozási megközelítés, amelyben a csomagokat flow-kká aggregálják, majd tárolás és elemzés céljából exportálják.</p>
-<h2 id="ip-fejléc">IP FEJLÉC</h2>
+<h2>IP FEJLÉC</h2>
 <p><em>(IP fejléc szerkezetének ábrája – mezők: Version, IHL (Header Length), Type of Service, Total Length, Identification, IP Flags, Fragment Offset, Time To Live (TTL), Protocol, Header Checksum, Source Address, Destination Address, IP Option)</em></p>
-<h2 id="tcp-fejléc">TCP FEJLÉC</h2>
+<h2>TCP FEJLÉC</h2>
 <p><em>(TCP fejléc szerkezetének ábrája – mezők: Source Port, Destination Port, Sequence Number, Acknowledgment Number, Offset, Reserved, TCP Flags (CEUAPRSF), Window, Checksum, Urgent Pointer, TCP Options)</em></p>
-<h2 id="udp-fejléc">UDP FEJLÉC</h2>
+<h2>UDP FEJLÉC</h2>
 <p><em>(UDP fejléc szerkezetének ábrája – mezők: Source Port, Destination Port, Length, Checksum)</em></p>
-<h2 id="flow-export-előnyök-és-hátrányok">FLOW-EXPORT: előnyök és hátrányok</h2>
+<h2>FLOW-EXPORT: előnyök és hátrányok</h2>
 <p><strong>ELŐNYÖK</strong></p>
 <ul>
 <li>alkalmas nagysebességű hálózatokban való használatra</li>
@@ -652,7 +652,7 @@
 <li>a flow-adattárak mérete így is könnyen meghaladhatja a több tíz terabájtot</li>
 <li>a hagyományos módszerek nem elegendőek a flow-szintű információ kezeléséhez, feldolgozásához, elemzéséhez és értelmezéséhez</li>
 </ul>
-<h2 id="csomagrögzítés-vs.-flow-export">CSOMAGRÖGZÍTÉS VS. FLOW-EXPORT</h2>
+<h2>CSOMAGRÖGZÍTÉS VS. FLOW-EXPORT</h2>
 <ul>
 <li>a csomagrögzítés és a flow-export <strong>nem zárják ki egymást</strong>
 <ul>

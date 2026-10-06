@@ -8,16 +8,16 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="stackedit">
-  <div class="stackedit__html"><h1 id="felhő-natív-hálózati-funkciók-fejlesztése-privát-felhőplatformok-kubernetes">Felhő-natív hálózati funkciók fejlesztése: Privát felhőplatformok: Kubernetes</h1>
-<h1 id="építsük-fel-a-kubernetest-elméletben">Építsük fel a Kubernetest! (elméletben)</h1>
+<body>
+  <div><h1>Felhő-natív hálózati funkciók fejlesztése: Privát felhőplatformok: Kubernetes</h1>
+<h1>Építsük fel a Kubernetest! (elméletben)</h1>
 <p><strong>Kubernetes</strong></p>
 <ul>
 <li>nyílt forráskódú konténer-orkesztrációs platform</li>
 <li>automatizálja a konténerizált alkalmazások telepítését, skálázását és kezelését</li>
 <li>eredetileg a Google-nál fejlesztették, 2014-ben nyílt forráskódúvá tették</li>
 </ul>
-<h2 id="szükségünk-van-egy-technológiára-a-kódunk-futtatásához">Szükségünk van egy technológiára a kódunk futtatásához</h2>
+<h2>Szükségünk van egy technológiára a kódunk futtatásához</h2>
 <ul>
 <li>megvan a szép kódunk</li>
 <li>szükségünk van valamire, amivel futtatni tudjuk
@@ -32,7 +32,7 @@
 <li>gyorsan indítható és leállítható</li>
 <li>kisebb erőforrásigényű, mint egy virtuális gép</li>
 </ul>
-<h2 id="konténer-konfiguráció">Konténer konfiguráció</h2>
+<h2>Konténer konfiguráció</h2>
 <ul>
 <li>további konfigurációkra lehet szükségünk a konténerünkhöz (pl. az adatbázis-elérési URL)</li>
 </ul>
@@ -50,7 +50,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="valahol-futtatnunk-kell-a-podjainkat">Valahol futtatnunk kell a Podjainkat</h2>
+<h2>Valahol futtatnunk kell a Podjainkat</h2>
 <ul>
 <li>szükségünk van valamire, ami képes futtatni a Podjainkat
 <ul>
@@ -69,7 +69,7 @@
 </li>
 <li>ezt <strong>Worker Node</strong>-nak (munkás node) fogjuk hívni</li>
 </ul>
-<h2 id="mi-van-ha-sok-podot-akarunk-futtatni">Mi van, ha sok Podot akarunk futtatni?</h2>
+<h2>Mi van, ha sok Podot akarunk futtatni?</h2>
 <ul>
 <li>sok Podot szeretnénk egyszerre futtatni
 <ul>
@@ -84,7 +84,7 @@
 <li>telepítsünk több különböző Podot!</li>
 <li>vannak-e itt olyan problémák, amelyeket meg kell oldanunk?</li>
 </ul>
-<h2 id="szavazás-mi-romlik-el-több-node-esetén">Szavazás: mi romlik el több Node esetén?</h2>
+<h2>Szavazás: mi romlik el több Node esetén?</h2>
 <p>Most sok Podot futtatunk, több Worker Node-ra elosztva. Milyen ÚJ probléma jelentkezik, amely egyetlen Node esetén nem állt fenn?</p>
 <hr>
 <ul>
@@ -93,14 +93,14 @@
 <li>C) Minden Node-nak szüksége van a forráskód saját, külön másolatára</li>
 <li>D) A konténerek már nem lesznek könnyűsúlyúak, amint több Node-ot adunk hozzá</li>
 </ul>
-<h2 id="megoldás">Megoldás</h2>
+<h2>Megoldás</h2>
 <ul>
 <li>✓ A) A különböző Node-okon lévő Podok nem tudják megtalálni vagy elérni egymást a hálózaton keresztül</li>
 <li>✗ B) Semmi nem változik – több Node pontosan úgy viselkedik, mint egy</li>
 <li>✗ C) Minden Node-nak szüksége van a forráskód saját, külön másolatára</li>
 <li>✗ D) A konténerek már nem lesznek könnyűsúlyúak, amint több Node-ot adunk hozzá</li>
 </ul>
-<h1 id="problémák-több-node-esetén">Problémák több Node esetén</h1>
+<h1>Problémák több Node esetén</h1>
 <ul>
 <li><strong>Hálózatkezelés</strong>
 <ul>
@@ -119,7 +119,7 @@
 </li>
 <li>látunk-e itt problémákat? Kész vagyunk?</li>
 </ul>
-<h2 id="szavazás-ki-irányítja-a-klasztert">Szavazás: ki irányítja a klasztert?</h2>
+<h2>Szavazás: ki irányítja a klasztert?</h2>
 <p>Több Node-unk van, mindegyik hálózatba kötve, sok Podot futtatva. Ki dönti el, melyik Pod melyik Node-on fut, és ki veszi észre, ha egy Node leáll?</p>
 <hr>
 <ul>
@@ -128,14 +128,14 @@
 <li>C) Egy központosított komponens, amely látja a teljes klasztert</li>
 <li>D) Senki – a Podok csak ott futnak tovább, ahol elindultak</li>
 </ul>
-<h2 id="megoldás-1">Megoldás</h2>
+<h2>Megoldás</h2>
 <ul>
 <li>✗ A) Minden Node önállóan, egymástól függetlenül dönt</li>
 <li>✗ B) A konténerekben futó alkalmazáskód dönt</li>
 <li>✓ C) Egy központosított komponens, amely látja a teljes klasztert</li>
 <li>✗ D) Senki – a Podok csak ott futnak tovább, ahol elindultak</li>
 </ul>
-<h2 id="koordinálnunk-kell">Koordinálnunk kell!</h2>
+<h2>Koordinálnunk kell!</h2>
 <ul>
 <li>most van egy klaszterünk
 <ul>
@@ -153,7 +153,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="mit-csinál-a-vezérlősík-control-plane">Mit csinál a vezérlősík (control plane)?</h2>
+<h2>Mit csinál a vezérlősík (control plane)?</h2>
 <ul>
 <li>Szavazás: ezek közül melyek a vezérlősík felelősségi körei?</li>
 </ul>
@@ -165,7 +165,7 @@
 <li>D) Különböző vezérlőfolyamatok (control processes) kezelése</li>
 <li>E) API a konfigurációhoz és az adathozzáféréshez</li>
 </ul>
-<h2 id="megoldás-2">Megoldás</h2>
+<h2>Megoldás</h2>
 <ul>
 <li>✓ A) A klaszter konfigurációjának tárolása</li>
 <li>✗ B) Az alkalmazás forráskódjának fordítása (compile)</li>
@@ -173,7 +173,7 @@
 <li>✓ D) Különböző vezérlőfolyamatok kezelése</li>
 <li>✓ E) API a konfigurációhoz és az adathozzáféréshez</li>
 </ul>
-<h2 id="kössük-össze-a-klasztert">Kössük össze a klasztert!</h2>
+<h2>Kössük össze a klasztert!</h2>
 <ul>
 <li>szinte minden komponensünk megvan</li>
 <li>a worker node-oknak kommunikálniuk kell a vezérlősíkkal</li>
@@ -193,8 +193,8 @@
 </li>
 </ul>
 <hr>
-<h1 id="imperatív-–-deklaratív-programozás">Imperatív – deklaratív programozás</h1>
-<h2 id="imperatív-vs.-deklaratív-vezérlés">Imperatív vs. deklaratív vezérlés</h2>
+<h1>Imperatív – deklaratív programozás</h1>
+<h2>Imperatív vs. deklaratív vezérlés</h2>
 <ul>
 <li><strong>Lift-példa</strong>
 <ul>
@@ -210,7 +210,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="kubernetes-konfiguráció">Kubernetes konfiguráció</h2>
+<h2>Kubernetes konfiguráció</h2>
 <ul>
 <li>mind imperatív, mind deklaratív objektum-konfigurációt támogat</li>
 <li><strong>imperatív</strong>
@@ -228,10 +228,10 @@
 </li>
 </ul>
 <hr>
-<h1 id="felhő-natív-tervezés-kubernetesben">Felhő-natív tervezés Kubernetesben</h1>
+<h1>Felhő-natív tervezés Kubernetesben</h1>
 <p><strong>Konténerizált mikroszolgáltatás-alkalmazás</strong></p>
 <p><em>(Ábra egy konténerizált mikroszolgáltatás-architektúráról)</em></p>
-<h2 id="szavazás-túl-sok-forgalom-egyetlen-podnak">Szavazás: túl sok forgalom egyetlen Podnak</h2>
+<h2>Szavazás: túl sok forgalom egyetlen Podnak</h2>
 <p>A Podunk túlterhelt – a felhasználók lassú válaszidőkre panaszkodnak. Mihez kellene nyúlnunk a Kubernetesben, hogy ezt megoldjuk?</p>
 <hr>
 <ul>
@@ -240,14 +240,14 @@
 <li>C) Adjuk fel, és mondjuk meg a felhasználóknak, próbálják meg később</li>
 <li>D) Töröljük a Podot, hogy senki ne tudja használni – megoldva a probléma</li>
 </ul>
-<h2 id="megoldás-3">Megoldás</h2>
+<h2>Megoldás</h2>
 <ul>
 <li>✓ A) Telepítsünk több másolatot a Podból, és osszuk meg köztük a terhelést</li>
 <li>✗ B) SSH-zzunk be a Node-ra, és óránként manuálisan indítsuk újra a konténert</li>
 <li>✗ C) Adjuk fel, és mondjuk meg a felhasználóknak, próbálják meg később</li>
 <li>✗ D) Töröljük a Podot, hogy senki ne tudja használni – megoldva a probléma</li>
 </ul>
-<h2 id="replika-kezelés">Replika-kezelés</h2>
+<h2>Replika-kezelés</h2>
 <ul>
 <li>telepíthetünk egy Podot, de lehet, hogy többre van szükségünk</li>
 </ul>
@@ -266,7 +266,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="szavazás-melyik-poddal-kommunikáljon-a-kliens">Szavazás: melyik Poddal kommunikáljon a kliens?</h2>
+<h2>Szavazás: melyik Poddal kommunikáljon a kliens?</h2>
 <p>Most 3 replikánk van a Podunkból, mindegyiknek saját IP-címe van. Hogyan érje el a kliens „az alkalmazást" anélkül, hogy tudnia kellene, melyik replika válaszol?</p>
 <hr>
 <ul>
@@ -275,14 +275,14 @@
 <li>C) Csak az elsőként elindult Pod kap valaha forgalmat</li>
 <li>D) A 3 Pod automatikusan egyetlen Poddá olvad össze</li>
 </ul>
-<h2 id="megoldás-4">Megoldás</h2>
+<h2>Megoldás</h2>
 <ul>
 <li>✗ A) A kliens egy hardkódolt listát tart fenn mind a 3 Pod IP-címéről, és maga választ közülük</li>
 <li>✓ B) Egyetlen stabil végpont terheléselosztást végez az összes megfelelő Pod között</li>
 <li>✗ C) Csak az elsőként elindult Pod kap valaha forgalmat</li>
 <li>✗ D) A 3 Pod automatikusan egyetlen Poddá olvad össze</li>
 </ul>
-<h2 id="alapvető-terheléselosztás">Alapvető terheléselosztás</h2>
+<h2>Alapvető terheléselosztás</h2>
 <ul>
 <li>több Podunk van</li>
 <li>de a szolgáltatásunkat egészként szeretnénk elérni</li>
@@ -296,7 +296,7 @@
 <li>a Service automatikusan kezeli a terheléselosztást a célzott Podok között</li>
 <li>a <strong>kube-proxy</strong> valósítja meg</li>
 </ul>
-<h2 id="szavazás-a-forgalom-napközben-folyamatosan-változik">Szavazás: a forgalom napközben folyamatosan változik</h2>
+<h2>Szavazás: a forgalom napközben folyamatosan változik</h2>
 <p>A Service-ünk éles, de a forgalom ebédidőben magas, éjszaka alacsony. Kinek/minek kellene eldöntenie, hány replikát futtatunk egy adott pillanatban?</p>
 <hr>
 <ul>
@@ -305,14 +305,14 @@
 <li>C) Mindig a maximális számú replikát futtatjuk, folyamatosan</li>
 <li>D) A Kubernetes véletlenszerűen változtatja a replikák számát</li>
 </ul>
-<h2 id="megoldás-5">Megoldás</h2>
+<h2>Megoldás</h2>
 <ul>
 <li>✗ A) Egy ember manuálisan módosítja a replikaszámot néhány óránként</li>
 <li>✓ B) Egy kontroller, amely figyeli a metrikákat, és automatikusan módosítja a replikák számát</li>
 <li>✗ C) Mindig a maximális számú replikát futtatjuk, folyamatosan</li>
 <li>✗ D) A Kubernetes véletlenszerűen változtatja a replikák számát</li>
 </ul>
-<h2 id="automatikus-skálázás-auto-scaling">Automatikus skálázás (Auto-scaling)</h2>
+<h2>Automatikus skálázás (Auto-scaling)</h2>
 <ul>
 <li><strong>HPA: Horizontal Pod Autoscaler</strong> (horizontális Pod-skálázó)</li>
 <li>egy Deploymenthez kapcsolható</li>
@@ -325,13 +325,13 @@
 </ul>
 <hr>
 <p><img src="https://miro.medium.com/0*VAids_lMTUt97GDJ" alt="stateless_microservice_example"></p>
-<h2 id="további-kubernetes-funkciók-névterek-namespaces">További Kubernetes funkciók: Névterek (Namespaces)</h2>
+<h2>További Kubernetes funkciók: Névterek (Namespaces)</h2>
 <ul>
 <li>a névterek (Namespaces) lehetővé teszik a klaszter erőforrásainak felosztását több felhasználó között</li>
 <li>olyan környezetekben szánták őket használatra, ahol sok felhasználó van, több csapatra vagy projektre elosztva</li>
 <li>az egyik névtérben lévő erőforrások logikailag el vannak szigetelve egy másik névtér erőforrásaitól</li>
 </ul>
-<h2 id="további-kubernetes-funkciók-szolgáltatásfelderítés-service-discovery">További Kubernetes funkciók: Szolgáltatásfelderítés (Service discovery)</h2>
+<h2>További Kubernetes funkciók: Szolgáltatásfelderítés (Service discovery)</h2>
 <ul>
 <li>a Kubernetes beépített szolgáltatásfelderítési mechanizmusokat biztosít</li>
 <li>a Kubernetesben lévő szolgáltatások felderíthetők környezeti változókon vagy DNS-en keresztül</li>
@@ -339,7 +339,7 @@
 <li>a szolgáltatások stabil IP-címet és DNS-nevet kapnak, így a Podok könnyen megtalálhatják és elérhetik egymást</li>
 <li>a szolgáltatásfelderítés kulcsfontosságú a mikroszolgáltatás-architektúráknál, ahol a szolgáltatásoknak dinamikusan kell megtalálniuk és kapcsolatba lépniük egymással</li>
 </ul>
-<h2 id="további-kubernetes-funkciók-önjavítás-self-healing">További Kubernetes funkciók: Önjavítás (Self-healing)</h2>
+<h2>További Kubernetes funkciók: Önjavítás (Self-healing)</h2>
 <p><strong>Automatikus újraindítás</strong></p>
 <ul>
 <li>automatikusan újraindítja a hibásan működő vagy válaszképtelenné vált konténereket</li>
@@ -370,7 +370,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="önjavítás-a-gyakorlatban">Önjavítás a gyakorlatban</h2>
+<h2>Önjavítás a gyakorlatban</h2>
 <p><strong>Forgatókönyv: alkalmazás-Pod meghibásodása</strong></p>
 <ol>
 <li>a pod összeomlik memóriaszivárgás miatt</li>
@@ -389,7 +389,7 @@
 <li>a podok átütemeződnek egészséges node-okra</li>
 <li>a Service-ek automatikusan frissítik a végpontjaikat</li>
 </ol>
-<h2 id="további-kubernetes-funkciók-monitorozás">További Kubernetes funkciók: Monitorozás</h2>
+<h2>További Kubernetes funkciók: Monitorozás</h2>
 <p><strong>Alap metrika-feldolgozási lánc (Basic Metrics Pipeline)</strong></p>
 <p><img src="https://sookocheff.com/post/kubernetes/making-sense-of-kubernetes-metrics/assets/metrics-server-pipeline.png" alt="Ábra a metrika-feldolgozási láncról"></p>
 <hr>
@@ -414,7 +414,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="további-kubernetes-funkciók-monitorozás-–-prometheus">További Kubernetes funkciók: Monitorozás – Prometheus</h2>
+<h2>További Kubernetes funkciók: Monitorozás – Prometheus</h2>
 <p><img src="https://miro.medium.com/1*3SssB3twA13dzy88llV-8Q.png" alt="Prometheus ábra"><br>
 <strong>Prometheus</strong></p>
 <ul>
@@ -422,7 +422,7 @@
 <li>pull-alapú (lekérdezés-alapú) metrikagyűjtés</li>
 <li>az adatokat olyan végpontokról gyűjti, amelyek egy meghatározott formátumban teszik közzé a metrikákat</li>
 </ul>
-<h2 id="további-kubernetes-funkciók-konfiguráció--tárolás">További Kubernetes funkciók: Konfiguráció / Tárolás</h2>
+<h2>További Kubernetes funkciók: Konfiguráció / Tárolás</h2>
 <p><strong>Pod testreszabás</strong> A konténerek általában nem egy adott feladatra specializáltak.</p>
 <p>Megoldások:</p>
 <ol>
@@ -459,8 +459,8 @@
 </li>
 </ul>
 <hr>
-<h1 id="összefoglaló">Összefoglaló</h1>
-<h2 id="kubernetes-klaszter-komponensek">Kubernetes: klaszter-komponensek</h2>
+<h1>Összefoglaló</h1>
+<h2>Kubernetes: klaszter-komponensek</h2>
 <p><strong>Vezérlősík (Control plane)</strong></p>
 <ul>
 <li><strong>kube-apiserver</strong>
@@ -507,7 +507,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="kubernetes-objektumok">Kubernetes: Objektumok</h2>
+<h2>Kubernetes: Objektumok</h2>
 <p><strong>Pod</strong></p>
 <ul>
 <li>a számítás legkisebb telepíthető egysége</li>
@@ -551,7 +551,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="további-olvasnivaló">További olvasnivaló</h2>
+<h2>További olvasnivaló</h2>
 <p>Jó forrás a magas szintű koncepciók megértéséhez:</p>
 <p><strong>„Kubernetes Patterns"</strong> – Bilgin Ibryam és Roland Huß</p>
 <p><a href="http://k8spatterns.com/">http://k8spatterns.com/</a> (közvetlen link)</p>
