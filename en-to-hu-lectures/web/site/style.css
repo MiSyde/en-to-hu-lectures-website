@@ -1,0 +1,40 @@
+:root {
+  --content-width: 45em;
+  --font-size: 20px;
+  --main-background: rgb(244, 236, 216);
+  --main-foreground: rgb(91, 70, 54);
+  --toolbar-border: var(--main-foreground);
+  --icon-fill: var(--main-foreground);
+  --icon-disabled-fill: rgba(91, 70, 54, 0.4);
+}
+
+body {
+  color-scheme: light;
+  color: var(--main-foreground);
+  background: var(--main-background);
+  font-size: var(--font-size);
+}
+
+a:link {
+  color: rgb(165, 131, 104);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: rgb(86, 45, 17);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: rgb(185, 154, 126);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: rgb(185, 154, 126);
+  background-color: transparent;
+  text-decoration: underline;
+}
