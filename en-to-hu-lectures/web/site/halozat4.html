@@ -1,0 +1,651 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine Learning</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<h1 id="gépi-tanulás-machine-learning">Gépi tanulás (Machine Learning)</h1>
+<h2 id="mi-a-gépi-tanulás">MI A GÉPI TANULÁS?</h2>
+<ul>
+<li>„A tanulás minden olyan folyamat, amelynek révén egy rendszer a tapasztalatból javítja a teljesítményét." – Herbert Simon</li>
+<li>A gépi tanulás olyan algoritmusok tanulmányozása, amelyek
+<ul>
+<li>javítják a teljesítményüket (<strong>P</strong>, performance)</li>
+<li>valamilyen feladaton (<strong>T</strong>, task)</li>
+<li>tapasztalat (<strong>E</strong>, experience) segítségével</li>
+</ul>
+</li>
+<li>Egy jól definiált tanulási feladatot a <strong>&lt; P, T, E &gt;</strong> hármas ad meg.</li>
+</ul>
+<h2 id="mikor-használjunk-gépi-tanulást">MIKOR HASZNÁLJUNK GÉPI TANULÁST?</h2>
+<ul>
+<li>nem létezik emberi szakértelem (navigáció a Marson)</li>
+<li>a szakértelem nem magyarázható el (beszédfelismerés)</li>
+<li>a modelleket testre kell szabni (személyre szabott orvoslás)</li>
+<li>a modellek hatalmas adatmennyiségen alapulnak (genomika)</li>
+</ul>
+<h2 id="példák-tanulási-feladatokra">PÉLDÁK TANULÁSI FELADATOKRA</h2>
+<ul>
+<li><strong>Dámajáték</strong>
+<ul>
+<li>Feladat: dámázás</li>
+<li>Teljesítmény: a megnyert játszmák százaléka</li>
+<li>Tapasztalat: gyakorlójátszmák önmaga ellen</li>
+</ul>
+</li>
+<li><strong>Karakterfelismerés</strong>
+<ul>
+<li>Feladat: kézzel írt karakterek felismerése</li>
+<li>Teljesítmény: a helyesen osztályozott karakterek százaléka</li>
+<li>Tapasztalat: kézzel írt karakterekről készült, emberek által címkézett képek adatbázisa</li>
+</ul>
+</li>
+<li><strong>Energiaigény-előrejelzés</strong>
+<ul>
+<li>Feladat: bizonyos területek energiaigényének előrejelzése</li>
+<li>Teljesítmény: az energiaigény-előrejelzések pontossága</li>
+<li>Tapasztalat: múltbeli energiafogyasztási adatok, időjárási mintázatok és gazdasági mutatók</li>
+</ul>
+</li>
+</ul>
+<h2 id="osztályozás-és-regresszió">OSZTÁLYOZÁS ÉS REGRESSZIÓ</h2>
+<ul>
+<li><strong>Osztályozás (Classification):</strong>
+<ul>
+<li>egy címke hozzárendelése egy címkézetlen példához</li>
+<li>pl. spamszűrés</li>
+<li>típusai: bináris és többosztályos</li>
+</ul>
+</li>
+<li><strong>Regresszió (Regression)</strong>
+<ul>
+<li>valós értékű címke előrejelzése egy címkézetlen példa alapján</li>
+<li>pl. lakásár-becslés</li>
+</ul>
+</li>
+</ul>
+<h2 id="modellalapú-vs.-példányalapú-tanulás">MODELLALAPÚ VS. PÉLDÁNYALAPÚ TANULÁS</h2>
+<ul>
+<li><strong>Modellalapú (Model-Based)</strong>
+<ul>
+<li>létrejön egy modell, amelynek paramétereit a tanító adatokból tanulják</li>
+<li>a modell felépítése után a tanító adatok elvethetők</li>
+<li>pl. neurális hálózatok</li>
+</ul>
+</li>
+<li><strong>Példányalapú (Instance-Based)</strong>
+<ul>
+<li>a modell a teljes adathalmazt használja modellként</li>
+<li>pl. k-legközelebbi szomszéd (k-Nearest Neighbours)</li>
+</ul>
+</li>
+</ul>
+<h2 id="a-tanulás-típusai">A TANULÁS TÍPUSAI</h2>
+<ul>
+<li><strong>Felügyelt tanulás (Supervised Learning)</strong>
+<ul>
+<li>adott: tanító adatok + a kívánt kimenetek (címkék)</li>
+</ul>
+</li>
+<li><strong>Felügyelet nélküli tanulás (Unsupervised Learning)</strong>
+<ul>
+<li>adott: tanító adatok (a kívánt kimenetek nélkül)</li>
+</ul>
+</li>
+<li><strong>Részben felügyelt tanulás (Semi-supervised Learning)</strong>
+<ul>
+<li>adott: tanító adatok + néhány kívánt kimenet</li>
+</ul>
+</li>
+<li><strong>Megerősítéses tanulás (Reinforcement Learning)</strong>
+<ul>
+<li>jutalmak egy cselekvéssorozatból</li>
+</ul>
+</li>
+</ul>
+<h2 id="felügyelt-tanulás-regresszió">FELÜGYELT TANULÁS (REGRESSZIÓ)</h2>
+<ul>
+<li>adott (x₁, y₁), …, (xₙ, yₙ) adatpont-párok</li>
+<li>tanuljunk meg egy f(x) függvényt, amely y-t jósolja meg x alapján</li>
+<li>ha y valós értékű → <strong>regresszió</strong><br>
+<img src="https://quizizz.com/media/resource/gs/quizizz-media/quizzes/36eae845-ab54-40c9-8738-a9fc377a5575" alt=""></li>
+</ul>
+<h2 id="felügyelt-tanulás-osztályozás">FELÜGYELT TANULÁS (OSZTÁLYOZÁS)</h2>
+<ul>
+<li>adott (x₁, y₁), …, (xₙ, yₙ) adatpont-párok</li>
+<li>tanuljunk meg egy f(x) függvényt, amely y-t jósolja meg x alapján</li>
+<li>ha y kategorikus → <strong>osztályozás</strong><br>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLU-6goUzw8zFtt5RpB_JAF3roFpQYXbJA_5skCLi58EMyZbcS" alt=""></li>
+</ul>
+<h2 id="felügyelt-tanulás-osztályozás-folyt.">FELÜGYELT TANULÁS (OSZTÁLYOZÁS) (folyt.)</h2>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBHweC7q0BDSScY00iIYBIBwVrGw1muaOCykEKHatIOzP6C6B0" alt=""></p>
+<h2 id="felügyelt-tanulás-osztályozás-folyt.-1">FELÜGYELT TANULÁS (OSZTÁLYOZÁS) (folyt.)</h2>
+<p>x lehet többdimenziós → minden dimenzió egy attribútumnak felel meg<br>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN-6OvdKozdEupbz_comv0KMiV3FiRamvAQYH0EGwXJcUt_MeW" alt=""></p>
+<ul>
+<li>Sejtméret egyenletessége (Uniformity of Cell Size)</li>
+<li>Sejtalak egyenletessége (Uniformity of Cell Shape)</li>
+</ul>
+<h2 id="felügyelet-nélküli-tanulás">FELÜGYELET NÉLKÜLI TANULÁS</h2>
+<ul>
+<li>adott x₁, …, xₙ adatpontok</li>
+<li>találjuk meg az x mögött rejlő rejtett struktúrát</li>
+<li>példák:
+<ul>
+<li>klaszterezés (Clustering)</li>
+<li>dimenziócsökkentés (Dimensionality Reduction)</li>
+<li>kiugró értékek észlelése (Outlier Detection)<br>
+<img src="https://alexhwilliams.info/itsneuronalblog/img/clustering/clustering-consistency.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<h2 id="felügyelet-nélküli-tanulás-folyt.">FELÜGYELET NÉLKÜLI TANULÁS (folyt.)</h2>
+<ul>
+<li>egyedek csoportosítása genetikai hasonlóság alapján<br>
+<img src="https://64.media.tumblr.com/16b8fc9a57bb70dbca9433170e70493f/tumblr_inline_o5hbdxmurJ1rr54bf_500.png" alt="Sebastian Abondano — Machine Learning: Supervised ..."></li>
+</ul>
+<h2 id="felügyelet-nélküli-tanulás-folyt.-1">FELÜGYELET NÉLKÜLI TANULÁS (folyt.)</h2>
+<ul>
+<li><strong>Dimenziócsökkentés</strong>
+<ul>
+<li>csökkenti az adathalmaz jellemzőinek (feature-jeinek) vagy dimenzióinak számát</li>
+<li>kiemeli az adathalmaz fontos jellemzőit, csökkentve a jelenlévő irreleváns vagy véletlenszerű jellemzők számát</li>
+<li>főkomponens-analízis (Principal Component Analysis, PCA)</li>
+</ul>
+</li>
+</ul>
+<h2 id="felügyelet-nélküli-tanulás-–-példák">FELÜGYELET NÉLKÜLI TANULÁS – PÉLDÁK</h2>
+<ul>
+<li><strong>Anomáliadetektálás:</strong> olyan adatpontok felfedezése, amelyek atipikusak egy adathalmazban.</li>
+<li><strong>Ajánlórendszerek:</strong> olyan mintázatok vagy trendek felfedezése, amelyek személyre szabott ajánlások alapjául szolgálhatnak online kereskedők számára.</li>
+<li><strong>Ügyfélszegmentálás:</strong> a felügyelet nélküli tanulást gyakran használják vásárlói perszóna-profilok létrehozására is, az ügyfelek közös jellemzői vagy vásárlási szokásai alapján történő klaszterezéssel.</li>
+<li><strong>Csalásfelderítés:</strong> szokatlan adatpontok feltárása az adathalmazokban.</li>
+<li><strong>Genetikai kutatás:</strong> a genetikai klaszterezés egy másik gyakori felügyelet nélküli tanulási példa. Hierarchikus klaszterezési algoritmusokat gyakran használnak DNS-mintázatok elemzésére és evolúciós kapcsolatok feltárására.</li>
+</ul>
+<h2 id="megerősítéses-tanulás-reinforcement-learning">MEGERŐSÍTÉSES TANULÁS (REINFORCEMENT LEARNING)</h2>
+<ul>
+<li>adott állapotok és cselekvések sorozata (késleltetett) jutalmakkal</li>
+<li>kimenet: egy stratégia/policy (amely minden állapothoz egy cselekvést rendel)</li>
+<li>meghatározza, mit kell tenni egy adott állapotban</li>
+</ul>
+<h2 id="tanulórendszer-tervezése">TANULÓRENDSZER TERVEZÉSE</h2>
+<ul>
+<li><strong>A tanulási feladat meghatározása</strong>
+<ul>
+<li>feladat (Task)</li>
+<li>teljesítmény (Performance)</li>
+<li>tapasztalat (Experience)</li>
+</ul>
+</li>
+<li><strong>Tanulóalgoritmus kiválasztása</strong>
+<ul>
+<li>amely a célfüggvényt a tapasztalatból következteti ki</li>
+</ul>
+</li>
+</ul>
+<h2 id="lineáris-regresszió">LINEÁRIS REGRESSZIÓ</h2>
+<ul>
+<li>
+<p>olyan modell, amely a bemenet jellemzőinek lineáris kombinációja</p>
+<p>f_{w,b}(x) = wx + b</p>
+</li>
+<li>
+<p>keressünk egy olyan egyenest, amely a lehető legközelebb van a tanító példákhoz</p>
+</li>
+<li>
+<p>hogyan találjuk meg az optimális (w, b) értékeket?</p>
+</li>
+<li>
+<p>minimalizáljuk a veszteségfüggvényt (loss function)!</p>
+<p>(1/N) · Σ_{i=1…N} (f_{w,b}(xᵢ) − yᵢ)²</p>
+</li>
+</ul>
+<p><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTJNDv-YwPNYC5wlHNzh8q78C74G86X4oUNtQJ43izI44gUWOgg" alt=""></p>
+<h2 id="logisztikus-regresszió">LOGISZTIKUS REGRESSZIÓ</h2>
+<ul>
+<li>a logisztikus regresszió nem is regresszió…</li>
+<li>ez egy osztályozó tanulóalgoritmus</li>
+<li>mit tegyünk, ha y bináris?</li>
+<li>ha a negatív címke 0, a pozitív címke 1</li>
+<li>egyszerűen találnunk kell egy olyan folytonos függvényt, amelynek értékkészlete (0,1)</li>
+<li>ebben az esetben, ha a modell által x bemenetre visszaadott érték közelebb van 0-hoz, akkor negatív címkét rendelünk x-hez; különben a példa pozitív címkét kap</li>
+</ul>
+<h2 id="standard-logisztikus-függvény">STANDARD LOGISZTIKUS FÜGGVÉNY</h2>
+<p>f(x) = 1 / (1 + e^(−x))</p>
+<p>f_{w,b}(x) = 1 / (1 + e^(−(wx+b)))<br>
+<img src="https://dl.acm.org/cms/attachment/html/10.1145/3558819.3565160/assets/html/images/image29.jpg" alt="An improved binary particle swarm optimization algorithm"></p>
+<h2 id="logisztikus-regresszió-folyt.">LOGISZTIKUS REGRESSZIÓ (folyt.)</h2>
+<ul>
+<li>a logisztikus regresszióban négyzetes veszteség használata és az empirikus kockázat minimalizálása helyett a tanító halmaz valószínűségét (likelihood) maximalizáljuk a modell szerint</li>
+<li>a logisztikus regresszió optimalizálási kritériumát maximum likelihood-nak (legnagyobb valószínűség elvének) nevezik</li>
+<li>a gyakorlatban kényelmesebb a likelihood helyett a log-likelihood-ot maximalizálni</li>
+<li>a fenti optimalizálási problémára nincs zárt alakú megoldás</li>
+</ul>
+<h2 id="döntési-fa-tanulás-decision-tree-learning">DÖNTÉSI FA TANULÁS (DECISION TREE LEARNING)</h2>
+<ul>
+<li>a döntési fa egy folyamatábra-szerű struktúra, amelyben
+<ul>
+<li>minden döntési csomópont egy attribútumon végzett „tesztet" jelent</li>
+<li>minden él (ág) a teszt kimenetelét jelenti</li>
+<li>minden levélcsomópont egy osztálycímkét jelent</li>
+</ul>
+</li>
+</ul>
+<h2 id="hogyan-hozzunk-létre-egy-döntési-csomópontot">HOGYAN HOZZUNK LÉTRE EGY DÖNTÉSI CSOMÓPONTOT</h2>
+<ul>
+<li>hozzunk létre felosztásokat (részhalmaz-párokat)
+<ul>
+<li>az összes j = 1, …, D jellemzőn keresztül</li>
+<li>az összes t küszöbértéken keresztül</li>
+</ul>
+</li>
+<li>értékeljük az egyes felosztásokat egy veszteségfüggvénnyel (pl. entrópia)</li>
+<li>válasszuk ki a legjobb (j, t) kombinációt</li>
+</ul>
+<h2 id="döntési-fa-tanuló-algoritmus-id3">DÖNTÉSI FA TANULÓ ALGORITMUS (ID3)</h2>
+<ul>
+<li>a döntési fa tanuló algoritmusnak többféle megfogalmazása létezik</li>
+<li>az optimalizálási kritérium ebben az esetben az átlagos log-likelihood</li>
+</ul>
+<h2 id="entrópia-alapú-felosztási-kritérium">ENTRÓPIA-ALAPÚ FELOSZTÁSI KRITÉRIUM</h2>
+<ul>
+<li>az adatokban lévő bizonytalanság mértéke</li>
+<li>intuitíven értelmezhető:
+<ul>
+<li>minimumát (0) akkor éri el, ha minden példának ugyanaz a címkéje</li>
+<li>maximumát (1) akkor éri el, ha az S halmaz példáinak fele 1-es címkét kapott</li>
+</ul>
+</li>
+</ul>
+<h2 id="előnyök-döntési-fák">ELŐNYÖK (döntési fák)</h2>
+<ul>
+<li><strong>Könnyen értelmezhető</strong>
+<ul>
+<li>könnyebb megérteni és felhasználni</li>
+<li>könnyen látható, mely attribútumok a legfontosabbak</li>
+</ul>
+</li>
+<li><strong>Kevés vagy semmilyen adat-előkészítést nem igényel</strong>
+<ul>
+<li>különféle adattípusokat kezelhet</li>
+<li>hiányzó értékeket kezelhet</li>
+</ul>
+</li>
+<li><strong>Rugalmasabb</strong>
+<ul>
+<li>osztályozásra és regresszióra is használható</li>
+<li>érzéketlen az attribútumok közötti mögöttes összefüggésekre</li>
+</ul>
+</li>
+</ul>
+<h2 id="hátrányok-döntési-fák">HÁTRÁNYOK (döntési fák)</h2>
+<ul>
+<li><strong>Hajlamos a túlillesztésre (overfitting)</strong>
+<ul>
+<li>hajlamos túlilleszkedni, és nem általánosít jól új adatokra</li>
+<li>előmetszés (pre-pruning): leállítja a fa növekedését, ha nincs elegendő adat</li>
+<li>utómetszés (post-pruning): a fa felépítése után eltávolítja a nem elegendő adattal rendelkező részfákat</li>
+</ul>
+</li>
+<li><strong>Nagy varianciájú becslők</strong>
+<ul>
+<li>az adatokon belüli kis változások nagyon eltérő döntési fát eredményezhetnek</li>
+<li>a bagging, vagyis a becslések átlagolása csökkentheti a varianciát</li>
+</ul>
+</li>
+<li><strong>Költségesebb</strong>
+<ul>
+<li>mohó (greedy) keresési megközelítés az építés során</li>
+<li>a betanítás drágább lehet más algoritmusokhoz képest</li>
+</ul>
+</li>
+</ul>
+<h2 id="együttes-tanulás-ensemble-learning">EGYÜTTES TANULÁS (ENSEMBLE LEARNING)</h2>
+<ul>
+<li>egyetlen szuperpontos modell helyett</li>
+<li>sok kis pontosságú modell (gyenge tanulók, weak learners)</li>
+<li>e gyenge modellek előrejelzéseinek kombinálása (súlyozott szavazás) egy nagy pontosságú meta-modell eléréséhez</li>
+<li><strong>Gyenge tanulók</strong>
+<ul>
+<li>nem képesek összetett modelleket tanulni, de gyorsak</li>
+<li>jellemzően sekély döntési fák</li>
+<li>nem szabad, hogy azonosak legyenek…</li>
+</ul>
+</li>
+</ul>
+<h2 id="bagging">BAGGING</h2>
+<ul>
+<li>a tanító adathalmaz sok különböző részhalmazát használja</li>
+<li>egy gyenge tanulót tanítunk egy-egy részhalmazon</li>
+<li>ez sok különböző gyenge modellt eredményez</li>
+<li>a gyenge modellek kombinálása</li>
+</ul>
+<h2 id="véletlen-erdő-random-forest">VÉLETLEN ERDŐ (RANDOM FOREST)</h2>
+<ul>
+<li>lényegében egy egyszerű bagging algoritmus</li>
+<li>módosított fatanuló algoritmust használ
+<ul>
+<li>minden felosztásnál a jellemzők egy véletlen részhalmazát használja</li>
+<li>ez csökkenti a fák korrelációját</li>
+</ul>
+</li>
+<li><strong>Fontos hiperparaméterek:</strong>
+<ul>
+<li>a fák száma</li>
+<li>a véletlen jellemző-részhalmaz mérete</li>
+</ul>
+</li>
+</ul>
+<h2 id="boosting">BOOSTING</h2>
+<ul>
+<li>
+<p>induljunk egy konstans modellel</p>
+</li>
+<li>
+<p>minden modell után módosítjuk a címkéket:</p>
+<p>y* = y − f(x)</p>
+</li>
+<li>
+<p>a következő modellt a módosított tanító halmazon tanítjuk</p>
+<p>f = f₀ + α·f₁<br>
+<img src="https://cdn.corporatefinanceinstitute.com/assets/boosting1.png" alt=""></p>
+</li>
+</ul>
+<h2 id="boosting-folyt.">BOOSTING (folyt.)</h2>
+<ul>
+<li>induljunk egy konstans modellel</li>
+<li>minden modell után módosítjuk a címkéket: y* = y − f(x)</li>
+<li>a következő modellt a módosított tanító halmazon tanítjuk</li>
+<li>f = f₀ + α·f₁</li>
+<li>a reziduálisok (maradékok) megmutatják, mennyire jól (vagy rosszul) jósolja meg az aktuális modell az egyes tanító példák célértékét</li>
+<li>ezután egy újabb fát tanítunk az aktuális modell hibáinak kijavítására (ezért használunk reziduálisokat a valódi címkék helyett), és ezt az új fát valamilyen súllyal hozzáadjuk a meglévő modellhez</li>
+<li>így minden egyes, a modellhez hozzáadott újabb fa részlegesen kijavítja a korábbi fák hibáit, amíg el nem érjük a kombinálható fák maximális számát</li>
+</ul>
+<h2 id="jellemzőmérnökség-feature-engineering">JELLEMZŐMÉRNÖKSÉG (FEATURE ENGINEERING)</h2>
+<ul>
+<li>a nyers adatok adathalmazzá alakításának problémája</li>
+<li>sok kreativitást és lehetőleg szakterületi tudást igényel</li>
+<li>minden mérhető dolog használható jellemzőként</li>
+<li>de informatív jellemzőket szeretnénk (amelyek segítik a modellt)</li>
+</ul>
+<h2 id="one-hot-kódolás">ONE-HOT KÓDOLÁS</h2>
+<ul>
+<li>ha az adathalmaz egy jellemzője kategorikus</li>
+<li>pl. „színek" vagy „a hét napjai"</li>
+</ul>
+<h2 id="binning-kosárba-sorolás">BINNING (KOSÁRBA SOROLÁS)</h2>
+<ul>
+<li>numerikus jellemző kategorikussá alakítása</li>
+<li>a pontos szám talán nem számít sokat</li>
+<li>pl. korcsoportok</li>
+</ul>
+<h2 id="normalizálás">NORMALIZÁLÁS</h2>
+<ul>
+<li>egy tényleges értéktartomány átalakítása egy szabványos tartományra</li>
+<li>pl. [0, 1] vagy [−1, 1] tartományra</li>
+<li>megnövelheti a tanulás sebességét</li>
+</ul>
+<h2 id="standardizálás">STANDARDIZÁLÁS</h2>
+<ul>
+<li>a jellemzőértékeket úgy skálázzuk át, hogy a standard normális eloszlás tulajdonságaival rendelkezzenek</li>
+<li>előnyben részesített, ha:
+<ul>
+<li>felügyelet nélküli tanulóalgoritmusokról van szó</li>
+<li>a jellemző eloszlása közel áll a normálishoz</li>
+<li>a jellemzőnek kiugró értékei (extrém értékei) vannak</li>
+</ul>
+</li>
+</ul>
+<h2 id="hiányzó-jellemzők-kezelése">HIÁNYZÓ JELLEMZŐK KEZELÉSE</h2>
+<ul>
+<li>a hiányzó jellemzőkkel rendelkező példák eltávolítása az adathalmazból</li>
+<li>olyan tanulóalgoritmus használata, amely kezelni tudja a hiányzó jellemzőértékeket
+<ul>
+<li>a könyvtártól és az algoritmus konkrét implementációjától függ</li>
+</ul>
+</li>
+<li>adatpótlási (imputation) technika használata</li>
+</ul>
+<h2 id="adatpótlási-technikák">ADATPÓTLÁSI TECHNIKÁK</h2>
+<ul>
+<li>átlaggal való helyettesítés</li>
+<li>a normál tartományon kívüli értékkel való helyettesítés (jelzi, hogy ez hiányzik)</li>
+<li>alapértelmezett értékkel való helyettesítés</li>
+<li>regressziós modell létrehozása a hiányzó jellemzők előrejelzésére</li>
+<li>ugyanazt a technikát kell használni az előrejelzés során is</li>
+</ul>
+<h2 id="a-három-halmaz">A HÁROM HALMAZ</h2>
+<ul>
+<li><strong>Tanító halmaz (Training Set)</strong>
+<ul>
+<li>a modell felépítéséhez</li>
+</ul>
+</li>
+<li><strong>Validációs halmaz (Validation Set)</strong>
+<ul>
+<li>a tanulóalgoritmus kiválasztásához</li>
+<li>a legjobb hiperparaméterek megtalálásához</li>
+</ul>
+</li>
+<li><strong>Teszthalmaz (Test Set)</strong>
+<ul>
+<li>a modell kiértékeléséhez</li>
+</ul>
+</li>
+<li>nincs optimális arány
+<ul>
+<li>70/15/15</li>
+<li>95/2,5/2,5</li>
+</ul>
+</li>
+</ul>
+<h2 id="alulillesztés-és-túlillesztés-underfitting-és-overfitting">ALULILLESZTÉS ÉS TÚLILLESZTÉS (UNDERFITTING ÉS OVERFITTING)</h2>
+<ul>
+<li><strong>Magas torzítás (High Bias)</strong>
+<ul>
+<li>a modellnek nagy a hibája a tanító adatokon (alulillesztés)</li>
+<li>okok: túl egyszerű modell, a jellemzők nem informatívak</li>
+</ul>
+</li>
+<li><strong>Alacsony torzítás (Low Bias)</strong>
+<ul>
+<li>a modell jól teljesít a tanító adatokon</li>
+<li>okok: túl összetett modell, a példákhoz képest túl sok jellemző</li>
+</ul>
+</li>
+</ul>
+<h2 id="regularizáció">REGULARIZÁCIÓ</h2>
+<ul>
+<li>még a legegyszerűbb modell is túlillesztheti az adatokat…</li>
+<li>arra kényszeríti a tanulóalgoritmust, hogy kevésbé összetett modellt építsen</li>
+<li>megnövelt torzítás, csökkentett variancia (bias-variance tradeoff, torzítás–variancia kompromisszum)</li>
+<li>általában a célfüggvényt módosítják úgy, hogy bünteti a modell összetettségét</li>
+<li>L1 és L2 regularizáció</li>
+<li>az L2 általában jobb</li>
+</ul>
+<h2 id="a-modell-teljesítményének-értékelése">A MODELL TELJESÍTMÉNYÉNEK ÉRTÉKELÉSE</h2>
+<ul>
+<li><strong>Regresszió</strong>
+<ul>
+<li>átlagos négyzetes hiba (Mean Squared Error, MSE) vagy hasonló mutatók, mint az MAE, RMSE</li>
+<li>hasonlítsuk össze az MSE-t a tanító és a teszthalmazon</li>
+</ul>
+</li>
+<li><strong>Osztályozás</strong>
+<ul>
+<li>tévesztési mátrix (confusion matrix)</li>
+<li>pontosság (accuracy)</li>
+<li>költségérzékeny pontosság (cost-sensitive accuracy)</li>
+<li>precizitás/fedés (precision/recall)</li>
+<li>a ROC-görbe alatti terület (area under the ROC curve)</li>
+</ul>
+</li>
+</ul>
+<h2 id="tévesztési-mátrix-confusion-matrix">TÉVESZTÉSI MÁTRIX (CONFUSION MATRIX)</h2>
+<ul>
+<li>megmutatja, mennyire sikeres a modell a különböző osztályokhoz tartozó példák előrejelzésében</li>
+<li>segíthet a hibamintázatok meghatározásában</li>
+</ul>
+<h2 id="precizitásfedés-precisionrecall">PRECIZITÁS/FEDÉS (PRECISION/RECALL)</h2>
+<ul>
+<li>a gyakorlatban választanunk kell a magas precizitás és a magas fedés között</li>
+<li>a feladat típusa határozza meg, melyik fontosabb</li>
+<li>ha a hibák költségesek: magas precizitás</li>
+<li>ha az elszalasztott lehetőségek költségesek: magas fedés</li>
+<li><em>(forrás: wiki)</em></li>
+</ul>
+<h2 id="f-pontszám-f-score">F-PONTSZÁM (F-SCORE)</h2>
+<ul>
+<li>az előrejelzési teljesítmény mértéke</li>
+<li>a β két gyakran használt értéke:
+<ul>
+<li>2, amely a fedést magasabbra súlyozza, mint a precizitást</li>
+<li>0,5, amely a fedést alacsonyabbra súlyozza, mint a precizitást</li>
+</ul>
+</li>
+</ul>
+<h2 id="pontosság-accuracy">PONTOSSÁG (ACCURACY)</h2>
+<ul>
+<li>a helyes osztályozások aránya</li>
+<li>jó, ha mindkét osztály egyformán fontos</li>
+<li>az osztályok kiegyensúlyozatlansága befolyásolja</li>
+</ul>
+<h2 id="költségérzékeny-pontosság-cost-sensitive-accuracy">KÖLTSÉGÉRZÉKENY PONTOSSÁG (COST-SENSITIVE ACCURACY)</h2>
+<ul>
+<li>ha minden osztályhoz hozzárendelhető egy költség a hatás alapján</li>
+<li>például: a téves pozitívok (False Positives) 1000 $ kárt okoznak</li>
+<li>súlyként használható a számításokban</li>
+</ul>
+<h2 id="a-roc-görbe-alatti-terület-auc">A ROC-GÖRBE ALATTI TERÜLET (AUC)</h2>
+<ul>
+<li>ROC: receiver operating characteristic (vevő működési karakterisztika)</li>
+<li>a ROC-görbék az igaz pozitív arány és a hamis pozitív arány kombinációját használják</li>
+<li>csak olyan osztályozók értékelésére használható, amelyek valamilyen megbízhatósági pontszámot adnak vissza</li>
+<li>pl. logisztikus regresszió</li>
+<li>minél nagyobb a ROC-görbe alatti terület (AUC), annál jobb az osztályozó</li>
+</ul>
+<h2 id="hiperparaméter-hangolás-hyperparameter-tuning">HIPERPARAMÉTER-HANGOLÁS (HYPERPARAMETER TUNING)</h2>
+<ul>
+<li>a hiperparamétereket nem maga a tanulóalgoritmus optimalizálja</li>
+<li>hogyan találjuk meg a legjobb értékeket?
+<ul>
+<li><strong>rácskeresés (grid search):</strong> minden hiperparaméterhez egy tartomány</li>
+<li><strong>véletlen keresés (random search):</strong> minden paraméterhez egy eloszlás</li>
+<li><strong>bayesi hiperparaméter-optimalizálás</strong>
+<ul>
+<li>a korábbi kiértékelési eredményeket használják a következő kiértékelendő értékek kiválasztásához</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="keresztvalidáció-cross-validation">KERESZTVALIDÁCIÓ (CROSS-VALIDATION)</h2>
+<ul>
+<li>ha nincs megfelelő validációs halmazunk a hiperparaméterek hangolásához</li>
+<li>egy hiperparaméter-beállítás kiértékeléséhez:
+<ul>
+<li>a tanító halmazt több (pl. 5) azonos méretű részhalmazra (fold-ra) osztjuk</li>
+<li>5 modellt tanítunk be; mindegyiknél 1 fold a validációs halmaz, a másik 4 a tanító halmaz</li>
+<li>az 5 teljesítménymutató átlaga a hiperparaméter-beállítás végső értéke</li>
+<li>ez segít megtalálni a legjobb hiperparamétereket</li>
+</ul>
+</li>
+</ul>
+<h2 id="python-könyvtárak">PYTHON KÖNYVTÁRAK</h2>
+<ul>
+<li><strong>ML keretrendszerek:</strong> Scikit-Learn, XGBoost, LightGBM</li>
+<li><strong>AutoML keretrendszerek:</strong> Auto-sklearn, TPOT</li>
+<li><strong>Hiperparaméter-hangoló könyvtárak:</strong> Optuna, Hyperopt</li>
+<li><strong>Megerősítéses tanulási könyvtárak:</strong> Stable Baselines3, OpenAI Gym</li>
+<li><strong>ML munkafolyamat-eszközök:</strong> Mlflow, Weights &amp; Biases</li>
+</ul>
+
+<h1>Történelem</h1>
+
+<h2 id="a-kezdetek">A KEZDETEK</h2>
+<ul>
+<li><strong>Alan Turing és a Turing-teszt (1950)</strong>
+<ul>
+<li>az első formális teszt a mesterséges intelligenciára</li>
+<li>ha egy gép úgy tud beszélgetést folytatni egy emberrel, hogy nem lepleződik le gépként, akkor emberi intelligenciát mutatott</li>
+</ul>
+</li>
+<li><strong>A perceptron kifejlesztése (1957)</strong>
+<ul>
+<li>a neurális hálózatok egyik első modellje, amely bináris osztályozási feladatok megoldására volt képes</li>
+<li>a perceptronokat nem lehetett betanítani minták számos osztályának felismerésére</li>
+</ul>
+</li>
+</ul>
+<h2 id="a-gépi-tanulás-korai-időszaka">A GÉPI TANULÁS KORAI IDŐSZAKA</h2>
+<ul>
+<li><strong>A neurális hálózatok kritikája és hanyatlása (1969):</strong>
+<ul>
+<li>Marvin Minsky és Seymour Papert kiadta a „Perceptrons" című művet, amely rámutatott a perceptronok korlátaira</li>
+<li>kulcskorlát: képtelenség nemlineáris problémák megoldására</li>
+<li>hatás: ez a kritika évtizedekre jelentősen lelassította a neurális hálózatok kutatását</li>
+<li>a hangsúly eltolódása: a gépi tanulás más megközelítései kezdtek előtérbe kerülni</li>
+</ul>
+</li>
+<li><strong>Elmozdulás a statisztikai módszerek felé:</strong>
+<ul>
+<li>az 1970-es években a gépi tanulás elkezdett összeolvadni a statisztikai tanuláselméletekkel</li>
+<li>bayesi valószínűségi modellek bevezetése és alkalmazása</li>
+<li>jelentőség: ezek a modellek később a modern gépi tanulás fejlődésének alapjává váltak</li>
+</ul>
+</li>
+</ul>
+<h2 id="reneszánsz-és-fejlődés">RENESZÁNSZ ÉS FEJLŐDÉS</h2>
+<ul>
+<li><strong>Visszatérés a neurális hálózatokhoz</strong>
+<ul>
+<li>megújult érdeklődés a neurális hálózatok iránt az 1980-as években</li>
+<li>fókuszban a többrétegű perceptronok és a backpropagation (hibavisszaterjesztés) algoritmus</li>
+<li>1986-ban David Rumelhart, Geoffrey Hinton és Ronald Williams közzétett egy munkát, amely bemutatta a backpropagation hatékonyságát mély neurális hálózatok betanításában</li>
+<li>ez az áttörés megnyitotta az utat az összetettebb neurális hálózati modellek fejlesztése előtt</li>
+</ul>
+</li>
+<li><strong>Statisztikai tanuláselmélet (1990-es évek)</strong>
+<ul>
+<li>a statisztikai tanuláselmélet kidolgozása Vladimir Vapnik és munkatársai által</li>
+<li>a Support Vector Machine-ek (SVM-ek, tartóvektor-gépek) bevezetése, egy hatékony osztályozási módszer</li>
+<li>az SVM-ek kiválóan teljesítettek magas dimenziós adatok osztályozásában, és széles körben elterjedtek különféle gépi tanulási feladatokban</li>
+<li>ez új lehetőségeket nyitott, és bővítette a gépi tanulással foglalkozók eszköztárát</li>
+</ul>
+</li>
+</ul>
+<h2 id="a-gépi-tanulás-modern-kora">A GÉPI TANULÁS MODERN KORA</h2>
+<ul>
+<li><strong>Big data és megnövekedett számítási kapacitás</strong>
+<ul>
+<li>a 2000-es években a „big data" megjelenése és a számítási teljesítmény jelentős növekedése új lendületet adott a gépi tanulásnak</li>
+<li>a nagy adathalmazok és a fejlett hardverek (pl. GPU-k) lehetővé tették a mélytanulás széles körű alkalmazását</li>
+</ul>
+</li>
+<li><strong>A mélytanulási forradalom (2010-es évek)</strong>
+<ul>
+<li>a mélytanulás, különösen a konvolúciós neurális hálózatok (CNN-ek) és a rekurrens neurális hálózatok (RNN-ek) révén, jelentős előrelépést hozott a gépi tanulásban</li>
+<li>2012-ben az AlexNet – amelyet Alex Krizhevsky, Ilya Sutskever és Geoffrey Hinton fejlesztett – forradalmasította a képfeldolgozási feladatokat, és megnyerte a híres ImageNet versenyt, ezzel széles körben elismertté téve a mélytanulás hatékonyságát</li>
+</ul>
+</li>
+<li><strong>Fejlett algoritmusok és alkalmazások</strong>
+<ul>
+<li>generatív versengő hálózatok (Generative Adversarial Networks, GAN-ek)</li>
+<li>Transformer-alapú modellek (pl. BERT, GPT)</li>
+<li>jelentős előrelépés a természetesnyelv-feldolgozásban és a generatív modellezésben</li>
+</ul>
+</li>
+<li><strong>Etikai kérdések és szabályozás</strong>
+<ul>
+<li>a modellek torzítása (bias) és az adatvédelmi kérdések</li>
+<li>az MI szabályozása a társadalmi és jogi viták központi témájává vált</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>
