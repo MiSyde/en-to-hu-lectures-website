@@ -1,0 +1,561 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine Learning 2</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<h1 id="gépi-tanulás-2-machine-learning-2">Gépi tanulás 2 (Machine Learning 2)</h1>
+<h2 id="a-három-halmaz">A HÁROM HALMAZ</h2>
+<ul>
+<li><strong>Tanító halmaz (Training Set)</strong>
+<ul>
+<li>a modell felépítéséhez</li>
+</ul>
+</li>
+<li><strong>Validációs halmaz (Validation Set)</strong>
+<ul>
+<li>a tanulóalgoritmus kiválasztásához</li>
+<li>a legjobb hiperparaméterek megtalálásához</li>
+</ul>
+</li>
+<li><strong>Teszthalmaz (Test Set)</strong>
+<ul>
+<li>a modell kiértékeléséhez</li>
+</ul>
+</li>
+</ul>
+<h1 id="optimalizálás">Optimalizálás</h1>
+<ul>
+<li>Az optimalizálás a gépi tanulásban az a hajtómotor, amely a modellt egy véletlenszerű kezdeti tippből egy nagy pontosságú előrejelzővé fejleszti.
+<ul>
+<li>a modell paramétereinek módosítása egy célfüggvény minimalizálása (vagy maximalizálása) érdekében</li>
+</ul>
+</li>
+<li><strong>Regresszió:</strong> távolságalapú hibafüggvényekre összpontosít (MSE, MAE, RMSE). Az MSE kiértékelése mind a tanító, mind a teszthalmazon elengedhetetlen a túlillesztés észleléséhez.</li>
+<li><strong>Osztályozás:</strong> küszöbalapú kiértékelő eszközöket (tévesztési mátrix, precizitás/fedés, AUC-ROC) és költségérzékeny módszereket használ, amikor a téves osztályozásoknak egyenlőtlen valós büntetései vannak.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>Optimalizálás ≠ puszta veszteségminimalizálás</strong>
+<ul>
+<li><strong>A csapda:</strong> pusztán az, hogy a veszteségfüggvényt (pl. MSE vagy keresztentrópia) a tanító halmazon abszolút nullára csökkentjük, nem jelenti azt, hogy „jó" modellt találtunk. Ez általában azt jelenti, hogy túlillesztettünk.</li>
+<li><strong>A cél:</strong> egy valóban optimális modell az általánosítási hibát (a nem látott tesztadatokon mért hibát) minimalizálja, nem csupán a tanítási veszteséget.</li>
+</ul>
+</li>
+<li><strong>A veszteségfüggvény simasága meghatározza az optimalizálási stratégiát</strong>
+<ul>
+<li>Az MSE sima és mindenhol folytonosan differenciálható, ezért ideális folytonos optimalizáláshoz, például a gradiens-ereszkedéshez (Gradient Descent).</li>
+<li>Az MAE-nek nulla pontban nem differenciálható éles csúcsa van (|y − ŷ|), ami a közvetlen gradiens-optimalizálást bonyolultabbá teszi.</li>
+</ul>
+</li>
+<li><strong>Tanulság:</strong> a veszteségfüggvény megválasztása nemcsak azt befolyásolja, hogy milyen típusú hibákat büntetünk (pl. az MSE erősen bünteti a kiugró értékeket), hanem azt is, hogyan frissíti az algoritmus a súlyait.</li>
+</ul>
+<hr>
+<ul>
+<li><strong>A regularizáció korlátozott optimalizálás</strong>
+<ul>
+<li><strong>L1 (Lasso) és L2 (Ridge):</strong> büntetőtagok hozzáadása a veszteségfüggvényhez korlátozza a paraméterteret.
+<ul>
+<li>Az L1 éles geometriai korlátokat vezet be, amelyek a súlyokat pontosan 0-ra kényszerítik (automatikus jellemzőkiválasztást végezve).</li>
+<li>Az L2 simán korlátozza a súlyok nagyságát, a hozzájárulásokat a korrelált jellemzők között szétosztva, ezzel stabilizálva a modell betanítását.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>A kompromisszumok határozzák meg a „jóságot"</strong></p>
+<ul>
+<li><strong>Torzítás–variancia kompromisszum (Bias-Variance Trade-off):</strong> a modell egyszerűsége (torzítás) és rugalmassága (variancia) közötti kompromisszum. Az optimalizálás célja megtalálni a „legjobb pontot" közöttük, hogy minimalizáljuk a nem látott adatokon mért teljes hibát.</li>
+<li><strong>Precizitás vs. fedés:</strong> a döntési küszöbök módosítása a precizitás–fedés görbe mentén mozgat bennünket. A precizitás javítása gyakran csökkenti a fedést, és fordítva.</li>
+<li><strong>Költségérzékenység:</strong> valós alkalmazásokban egy „jó" modell az összes döntési költséget minimalizálja, nem csupán a súlyozatlan hibákat. A csalás észlelésének elmulasztása (téves negatív, False Negative) gyakran sokkal rosszabb, mint egy jogos felhasználó megjelölése (téves pozitív, False Positive).</li>
+</ul>
+<h2 id="célfüggvény--veszteségfüggvény-objectiveloss-function">CÉLFÜGGVÉNY / VESZTESÉGFÜGGVÉNY (OBJECTIVE/LOSS FUNCTION)</h2>
+<ul>
+<li>számszerűsíti a modell előrejelzése és a tényleges célérték közötti hibát</li>
+<li>méri a modell teljesítményét és pontosságát</li>
+</ul>
+<h2 id="veszteségfüggvények-regresszióhoz">VESZTESÉGFÜGGVÉNYEK REGRESSZIÓHOZ</h2>
+<ul>
+<li><strong>Átlagos négyzetes hiba (Mean Squared Error, MSE)</strong>
+<ul>
+<li>akkor használjuk, ha kevés a kiugró érték az adatokban</li>
+<li>erősen érzékeny a kiugró értékekre</li>
+</ul>
+</li>
+<li><strong>Átlagos abszolút hiba (Mean Absolute Error, MAE)</strong>
+<ul>
+<li>akkor használjuk, ha van esély kiugró értékekre az adatokban</li>
+<li>kissé bonyolultabb optimalizálni</li>
+</ul>
+</li>
+<li><strong>Huber-veszteség / simított átlagos abszolút hiba</strong>
+<ul>
+<li>az MSE és az MAE kombinációja</li>
+<li>kezelni tudja a kiugró értékeket</li>
+</ul>
+</li>
+</ul>
+<h2 id="veszteségfüggvények-osztályozáshoz">VESZTESÉGFÜGGVÉNYEK OSZTÁLYOZÁSHOZ</h2>
+<ul>
+<li><strong>Bináris keresztentrópia-veszteség (Binary Cross-Entropy Loss)</strong>
+<ul>
+<li>bináris osztályozáshoz</li>
+</ul>
+</li>
+<li><strong>Kategorikus keresztentrópia (Categorical Cross-Entropy)</strong>
+<ul>
+<li>többosztályos osztályozáshoz</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>Hinge-veszteség (Hinge Loss)</strong>
+<ul>
+<li>az adatpontok és a döntési határ közötti margó (sáv) növelésére</li>
+<li>maximális margójú osztályozásokhoz használják</li>
+</ul>
+</li>
+</ul>
+<h2 id="hogyan-találjuk-meg-az-„optimális-paramétereket">HOGYAN TALÁLJUK MEG AZ „OPTIMÁLIS" PARAMÉTEREKET</h2>
+<ul>
+<li>a folyamat során megkeressük azt a paraméterhalmazt, amely a modell legjobb teljesítményét eredményezi</li>
+<li>a modell paramétereit iteratívan frissítjük a betanítási folyamat során</li>
+<li><strong>Betanítási folyamat</strong>
+<ul>
+<li>indulás valamilyen X pontból</li>
+<li>válasszunk egy irányt (ha van), amely csökkenti a hibát</li>
+<li>tegyünk egy kis lépést abba az irányba, és kezdjük újra</li>
+<li>álljunk meg, ha egyik irány sem javítja a hibát</li>
+</ul>
+</li>
+</ul>
+<h2 id="a-gradiens-the-gradient">A GRADIENS (THE GRADIENT)</h2>
+<ul>
+<li>azt az irányt mutatja, amerre a függvény növekszik</li>
+<li>a gradienst vektorként ábrázoljuk (egy-egy elem minden bemeneti paraméterhez)</li>
+<li>megmutatja, mennyit változna a függvény, ha kis módosítást végeznénk a megfelelő paraméteren</li>
+</ul>
+<h2 id="lépések-a-megoldás-felé">LÉPÉSEK A MEGOLDÁS FELÉ</h2>
+<ul>
+<li>egy nagy lépés messzebb vihet bennünket a megoldástól</li>
+<li>a lépésméretet a tanulási rátával (learning rate) szabályozzuk</li>
+</ul>
+<h2 id="a-gradiens-ereszkedés-típusai">A GRADIENS-ERESZKEDÉS TÍPUSAI</h2>
+<ul>
+<li><strong>Batch (kötegelt) gradiens-ereszkedés</strong>
+<ul>
+<li>a tanító halmaz minden pontjára összegzi a hibát</li>
+<li>stabil hibagradiens és konvergencia (többnyire lokális minimumok felé)</li>
+<li>hosszú feldolgozási idő</li>
+</ul>
+</li>
+<li><strong>Sztochasztikus gradiens-ereszkedés (Stochastic Gradient Descent)</strong>
+<ul>
+<li>minden egyes példára lefuttat egy tanítási epochot</li>
+<li>nem hatékony, de könnyen tárolható</li>
+<li>jobb a globális minimum megtalálásában</li>
+</ul>
+</li>
+<li><strong>Mini-batch gradiens-ereszkedés</strong>
+<ul>
+<li>a tanító adathalmazt kis kötegekre (batch-ekre) osztja</li>
+<li>minden ilyen köteg alapján frissítéseket végez</li>
+</ul>
+</li>
+</ul>
+<h2 id="kihívások">KIHÍVÁSOK</h2>
+<ul>
+<li>lokális minimumok és nyeregpontok</li>
+<li>eltűnő és felrobbanó gradiensek (Vanishing and Exploding Gradients)
+<ul>
+<li>a gradiens túl kicsivé válik</li>
+<li>vagy túl naggyá</li>
+</ul>
+</li>
+</ul>
+<h2 id="optimalizáló-algoritmusok">OPTIMALIZÁLÓ ALGORITMUSOK</h2>
+<ul>
+<li><strong>Sztochasztikus gradiens-ereszkedés (SGD)</strong></li>
+<li><strong>Nesterov-féle gyorsított gradiens (Nesterov Accelerated Gradient)</strong>
+<ul>
+<li>lendületet (az utolsó frissítést) ad a gradienshez</li>
+</ul>
+</li>
+<li><strong>AdaGrad (Adaptive Gradient)</strong>
+<ul>
+<li>adaptív tanulási ráta</li>
+</ul>
+</li>
+<li><strong>RMSProp (Root Mean Squared Propagation)</strong></li>
+<li><strong>Adam</strong>
+<ul>
+<li>lendület és adaptív tanulási ráta</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="neurális-hálózatok">Neurális hálózatok</h1>
+<h2 id="inspiráció">INSPIRÁCIÓ</h2>
+<ul>
+<li>az agy sok problémát sokkal könnyebben képes megoldani, mint akár a legjobb számítógép
+<ul>
+<li>képfelismerés</li>
+<li>beszédfelismerés</li>
+<li>mintafelismerés</li>
+</ul>
+</li>
+<li>olyan mesterséges rendszerek, amelyek kifinomult számításokra képesek</li>
+<li>hasonlóak azokhoz a feladatokhoz, amelyeket az emberi agy rutinszerűen végez</li>
+</ul>
+<h2 id="a-neurális-hálózatok-fejlődése">A NEURÁLIS HÁLÓZATOK FEJLŐDÉSE</h2>
+<ul>
+<li>az agy minden neuronjának viszonylag egyszerű funkciója van</li>
+<li>de – 10 milliárd van belőlük (60 billió kapcsolat)</li>
+<li>együttműködve hihetetlen feldolgozóegységet alkotnak</li>
+<li>az agyat a környezete tanítja</li>
+<li>tapasztalatból tanul</li>
+</ul>
+<h2 id="a-biológiai-inspiráció">A BIOLÓGIAI INSPIRÁCIÓ</h2>
+<ul>
+<li>az agyat a tudósok széles körben tanulmányozták</li>
+<li>a hatalmas összetettség miatt csak alapszintű megértés lehetséges</li>
+<li>még egyetlen neuron viselkedése is rendkívül összetett</li>
+<li>a mérnökök módosították a neurális modelleket, hogy hasznosabbak legyenek
+<ul>
+<li>kevésbé hasonlítanak a biológiára</li>
+<li>a terminológia nagy részét megtartották</li>
+</ul>
+</li>
+</ul>
+<h2 id="a-neuronok-felépítése">A NEURONOK FELÉPÍTÉSE</h2>
+<ul>
+<li><strong>Sejttest (Cell Body)</strong>
+<ul>
+<li>a neuron központi része</li>
+<li>genetikai információt tartalmaz</li>
+</ul>
+</li>
+<li><strong>Dendritek (Dendrites)</strong>
+<ul>
+<li>a sejttestből kiágazó „gyökerek"</li>
+<li>jeleket fogadnak és dolgoznak fel</li>
+</ul>
+</li>
+<li><strong>Axonok (Axons)</strong>
+<ul>
+<li>elektromos és kémiai jeleket továbbítanak más sejtek felé</li>
+<li>szinapszisokon keresztül kapcsolódnak a dendritekhez</li>
+</ul>
+</li>
+</ul>
+<h2 id="hogyan-működnek-a-neuronok">HOGYAN MŰKÖDNEK A NEURONOK</h2>
+<ul>
+<li>a neuron csak akkor „tüzel", ha a bemeneti jele rövid idő alatt meghalad egy bizonyos mennyiséget (küszöböt)</li>
+<li>a szinapszisok lehetővé teszik a neuronok közötti jelátvitelt</li>
+<li>a szinapszisok erőssége változó
+<ul>
+<li>a jó kapcsolatok nagy jelet engednek át</li>
+<li>a gyenge kapcsolatok csak gyenge jelet engednek át</li>
+<li>a szinapszisok vagy:
+<ul>
+<li>serkentők (excitatory – stimulálnak)</li>
+<li>gátlók (inhibitory – korlátoznak)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="aktivációs-függvények-activation-functions">AKTIVÁCIÓS FÜGGVÉNYEK (ACTIVATION FUNCTIONS)</h2>
+<h2 id="bináris-lépcsőfüggvény-binary-step">BINÁRIS LÉPCSŐFÜGGVÉNY (BINARY STEP)</h2>
+<ul>
+<li>nem képes többértékű kimeneteket szolgáltatni – például nem használható többosztályos osztályozási problémákhoz</li>
+<li>a lépcsőfüggvény gradiense nulla, ami akadályt jelent a backpropagation (hibavisszaterjesztés) folyamatában</li>
+</ul>
+<h2 id="lineáris-linear">LINEÁRIS (LINEAR)</h2>
+<ul>
+<li>egy lineáris aktivációs függvény a neurális hálózatot egyetlen réteggé alakítja</li>
+<li>az utolsó réteg továbbra is az első réteg lineáris függvénye lesz</li>
+</ul>
+<h2 id="szigmoid-sigmoid">SZIGMOID (SIGMOID)</h2>
+<ul>
+<li>gyakran használják olyan modellekhez, ahol valószínűséget kell előrejelezni</li>
+<li>differenciálható, és sima gradienst biztosít</li>
+</ul>
+<h2 id="tanh">TANH</h2>
+<ul>
+<li>általában rejtett rétegekben használják</li>
+</ul>
+<h2 id="relu">RELU</h2>
+<ul>
+<li>Rectified Linear Unit (egyenirányított lineáris egység)</li>
+<li>csak bizonyos számú neuron aktiválódik</li>
+<li>minden negatív bemeneti érték azonnal nullává válik</li>
+</ul>
+<h2 id="leaky-relu">LEAKY RELU</h2>
+<h2 id="softmax">SOFTMAX</h2>
+<ul>
+<li>többosztályos osztályozáshoz</li>
+<li>a bemeneti vektort valószínűségi eloszlássá normalizálja az exponenciális függvény segítségével</li>
+<li>olyan, mint több szigmoid kombinációja</li>
+<li>a relatív valószínűségeket számítja ki</li>
+</ul>
+<h2 id="backpropagation-hibavisszaterjesztés">BACKPROPAGATION (HIBAVISSZATERJESZTÉS)</h2>
+<ul>
+<li>gradiensek számítása neurális hálózatokban</li>
+</ul>
+<h2 id="a-neurális-hálózat-mint-beágyazott-függvény">A NEURÁLIS HÁLÓZAT MINT BEÁGYAZOTT FÜGGVÉNY</h2>
+<ul>
+<li>a neurális hálózat egy matematikai függvény</li>
+<li>a neurális hálózat rétegei beágyazott (nested) függvényt hoznak létre</li>
+<li>szükségünk van egy okos módszerre a gradiensek kiszámításához</li>
+<li>az optimalizáló algoritmusok gondoskodnak a többiről</li>
+</ul>
+<h2 id="alaparchitektúra">ALAPARCHITEKTÚRA</h2>
+<ul>
+<li>a neurális hálózatokat neuronok gyűjteményeként modellezik, amelyek egy aciklikus gráfban (nincsenek ciklusok) vannak összekapcsolva</li>
+<li>egyes neuronok kimenetei más neuronok bemeneteivé válhatnak</li>
+<li>gyakran különálló neuronrétegekbe szerveződnek</li>
+<li>a leggyakoribb rétegtípus a teljesen összekötött réteg (fully-connected layer)</li>
+<li>két szomszédos réteg neuronjai páronként teljesen össze vannak kötve</li>
+<li>egyetlen rétegen belüli neuronok között nincsenek kapcsolatok</li>
+</ul>
+<h2 id="elnevezési-konvenciók">ELNEVEZÉSI KONVENCIÓK</h2>
+<ul>
+<li><strong>N rétegű neurális hálózat</strong>
+<ul>
+<li>a bemeneti réteg nem számít bele</li>
+<li>az egyrétegű neurális hálózat olyan hálózatot jelent, amelynek nincsenek rejtett rétegei</li>
+</ul>
+</li>
+<li>Mesterséges neurális hálózatok = többrétegű perceptronok (Multi-Layer Perceptrons)</li>
+<li><strong>Két fő méretezési mérőszám</strong>
+<ul>
+<li>a neuronok száma</li>
+<li>a paraméterek száma</li>
+</ul>
+</li>
+</ul>
+<h2 id="reprezentációs-erő">REPREZENTÁCIÓS ERŐ</h2>
+<ul>
+<li>Vannak-e olyan függvények, amelyeket neurális hálózattal nem lehet modellezni?
+<ul>
+<li>legalább egy rejtett réteggel rendelkező neurális hálózatok univerzális approximátorok!</li>
+<li>ha egy is elég, miért használjunk több réteget, és miért menjünk mélyebbre?
+<ul>
+<li>a gyakorlatban a mélyebb hálózatok jobban működhetnek, mint az egy rejtett rétegűek</li>
+<li>általában a 3 rétegű hálózatok jobban teljesítenek, mint a 2 rétegűek</li>
+<li>de még mélyebbre menni (4, 5, 6 réteg) ritkán segít sokat</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="a-rétegek-számának-és-méretének-beállítása">A RÉTEGEK SZÁMÁNAK ÉS MÉRETÉNEK BEÁLLÍTÁSA</h2>
+<ul>
+<li>ahogy növeljük a rétegek méretét és számát
+<ul>
+<li>a hálózat kapacitása nő</li>
+<li>az ábrázolható függvények tere bővül</li>
+</ul>
+</li>
+</ul>
+<h2 id="több-neuron">TÖBB NEURON</h2>
+<ul>
+<li>több neuron bonyolultabb függvényeket tud kifejezni</li>
+<li>áldás és átok egyben
+<ul>
+<li>bonyolultabb adatokat is megtanulhatunk osztályozni</li>
+<li>könnyebb túlillesztenünk a tanító adatokat</li>
+</ul>
+</li>
+</ul>
+<h2 id="rejtett-neuron">3 REJTETT NEURON</h2>
+<ul>
+<li><strong>3 rejtett neuron</strong>
+<ul>
+<li>nagy vonalakban osztályozza az adatokat</li>
+<li>az adatokat két „foltként" modellezi</li>
+<li>a többit kiugró értékként (zajként) értelmezi</li>
+<li>a gyakorlatban ez jobb általánosításhoz vezethet a teszthalmazon</li>
+</ul>
+</li>
+<li>a kisebb neurális hálózatok előnyben részesítettek, ha az adatok nem elég összetettek</li>
+<li>vannak más, előnyben részesített módszerek a túlillesztés megelőzésére</li>
+<li>a gyakorlatban mindig jobb ezeket a módszereket használni a túlillesztés kontrollálására a neuronok számának szabályozása helyett</li>
+</ul>
+<h2 id="betanítás-kicsi-vs.-nagy">BETANÍTÁS (KICSI VS. NAGY)</h2>
+<ul>
+<li><strong>A kisebb hálózatokat nehezebb betanítani</strong>
+<ul>
+<li>veszteségfüggvényeiknek viszonylag kevés lokális minimumuk van</li>
+<li>e minimumok közül sokhoz könnyebb konvergálni, és ezek rosszak</li>
+<li>a végső veszteség jelentős varianciát mutathat (szerencse!)</li>
+</ul>
+</li>
+<li><strong>A nagyobb neurális hálózatok</strong>
+<ul>
+<li>több lokális minimumot tartalmaznak</li>
+<li>ezek a minimumok jobbak a veszteségük szempontjából</li>
+<li>az elért végső veszteség varianciája sokkal kisebb</li>
+<li>kevésbé függnek a véletlen inicializálás szerencséjétől</li>
+</ul>
+</li>
+</ul>
+<h2 id="előrecsatolt-neurális-hálózat-feedforward-neural-network">ELŐRECSATOLT NEURÁLIS HÁLÓZAT (FEEDFORWARD NEURAL NETWORK)</h2>
+<ul>
+<li>az információ áramlásának iránya jellemzi</li>
+<li>az információ a modellben csak egy irányban áramlik: előre</li>
+</ul>
+<h2 id="autoenkóder-autoencoder">AUTOENKÓDER (AUTOENCODER)</h2>
+<ul>
+<li>célja a saját bemeneteinek rekonstruálása</li>
+<li>a kimeneti rétegnek ugyanannyi egysége van, mint a bemeneti rétegnek</li>
+<li>hatékony kódolás</li>
+<li>dimenziócsökkentés</li>
+</ul>
+<h2 id="konvolúciós-neurális-hálózat-convolutional-neural-network">KONVOLÚCIÓS NEURÁLIS HÁLÓZAT (CONVOLUTIONAL NEURAL NETWORK)</h2>
+<ul>
+<li>feltételezi, hogy a bemenetek képek!</li>
+</ul>
+<h2 id="konvolúciós-réteg-convolutional-layer">KONVOLÚCIÓS RÉTEG (CONVOLUTIONAL LAYER)</h2>
+<ul>
+<li>a bemenetek képek
+<ul>
+<li>a neurális hálózatok nem skálázódnak jól teljes képekre (túl sok paraméter)</li>
+<li>a CNN-ek a neuronokat 3 dimenzióban rendezik: szélesség, magasság, mélység</li>
+<li>a szomszédos pixelek hasonlóak</li>
+</ul>
+</li>
+<li>minden neuron csak egy lokális régióhoz kapcsolódik (receptív mező, receptive field)
+<ul>
+<li>a neuron szűrőként (filterként) működik</li>
+<li>minden szűrőt végigcsúsztatunk (konvolváljuk) a képen, és skaláris szorzatot számolunk</li>
+<li>minden szűrő egy 2D aktivációs térképet hoz létre</li>
+</ul>
+</li>
+</ul>
+<h2 id="pooling-réteg-összevonó-réteg">POOLING RÉTEG (ÖSSZEVONÓ RÉTEG)</h2>
+<ul>
+<li>fokozatosan csökkenti a kép térbeli méretét
+<ul>
+<li>csökkenti a paraméterek számát</li>
+<li>csökkenti a számításokat</li>
+<li>kontrollálja a túlillesztést</li>
+</ul>
+</li>
+<li>minden mélységi szeleten (depth slice) függetlenül működik
+<ul>
+<li>lemintavételezés (downsampling)</li>
+<li>pl. a 2×2-es pooling a bemenetek 75%-át elveti</li>
+</ul>
+</li>
+<li><strong>Típusai:</strong>
+<ul>
+<li>MAX (a legjobb gyakorlat)</li>
+<li>MEAN (átlag), …</li>
+</ul>
+</li>
+</ul>
+<h2 id="teljesen-összekötött-rétegek-fully-connected-layers">TELJESEN ÖSSZEKÖTÖTT RÉTEG(EK) (FULLY-CONNECTED LAYER(S))</h2>
+<ul>
+<li>a konvolúciós és pooling rétegek után</li>
+<li>a mátrixot kilapítják (flatten)</li>
+<li>osztályozáshoz egy hagyományos neurális hálózatot használnak</li>
+</ul>
+<h2 id="rekurrens-neurális-hálózat-recurrent-neural-network">REKURRENS NEURÁLIS HÁLÓZAT (RECURRENT NEURAL NETWORK)</h2>
+<ul>
+<li>az adatokat előre is, de visszafelé is továbbítja!</li>
+</ul>
+<h2 id="rnn-alkalmazások">RNN ALKALMAZÁSOK</h2>
+<ul>
+<li><strong>Természetesnyelv-feldolgozás (NLP)</strong>
+<ul>
+<li>szöveggenerálás (a mondat következő szavának előrejelzése)</li>
+<li>gépi fordítás</li>
+</ul>
+</li>
+<li><strong>Beszédfelismerés és -szintézis</strong>
+<ul>
+<li>beszédből szöveg és szövegből beszéd</li>
+</ul>
+</li>
+<li><strong>Idősor-elemzés és előrejelzés</strong>
+<ul>
+<li>pénzügyi előrejelzés</li>
+<li>időjárás-előrejelzés</li>
+</ul>
+</li>
+</ul>
+<h2 id="kihívások-rnn">KIHÍVÁSOK (RNN)</h2>
+<ul>
+<li>eltűnő gradiens probléma (Vanishing Gradient Problem)</li>
+<li>hosszú távú függőségek megragadása
+<ul>
+<li>az RNN-ek memóriája idővel elhalványul</li>
+</ul>
+</li>
+<li>a párhuzamosság hiánya
+<ul>
+<li>az RNN-ek szekvenciális természete korlátozza a párhuzamos feldolgozási képességeiket</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="ml-keretrendszerek">ML keretrendszerek</h1>
+<h2 id="scikit-learn">SCIKIT-LEARN</h2>
+<ul>
+<li>ingyenes, Python-alapú ML keretrendszer</li>
+<li>a „svájci bicska" a gépi tanulás világában</li>
+<li>az összes szükséges ML-feladatot el tudja végezni
+<ul>
+<li>osztályozás</li>
+<li>regresszió</li>
+<li>klaszterezés</li>
+<li>dimenziócsökkentés</li>
+<li>modellválasztás</li>
+<li>előfeldolgozás</li>
+</ul>
+</li>
+<li><a href="https://scikit-learn.org/stable/index.html">https://scikit-learn.org/stable/index.html</a></li>
+</ul>
+<h2 id="tensorflow">TENSORFLOW</h2>
+<ul>
+<li>ingyenes és nyílt forráskódú</li>
+<li>a Google Brain csapata fejlesztette</li>
+<li>a mély neurális hálózatok betanítására és következtetésére (inference) összpontosít</li>
+<li>több hátránya is van: pl. nincs Windows-támogatás</li>
+<li><a href="https://www.tensorflow.org/">https://www.tensorflow.org/</a></li>
+</ul>
+<h2 id="pytorch">PYTORCH</h2>
+<ul>
+<li>nyílt forráskódú gépi tanulási keretrendszer</li>
+<li>a Facebook AI Research laborja fejlesztette</li>
+<li><strong>TorchVision:</strong> magas szintű felület, amely tartalmaz
+<ul>
+<li>előre betanított modelleket, adathalmazokat és képtranszformációs függvényeket</li>
+</ul>
+</li>
+<li><a href="https://pytorch.org/">https://pytorch.org/</a></li>
+</ul>
+<h2 id="keras">KERAS</h2>
+<ul>
+<li>felhasználóbarát API neurális hálózatok megvalósításához</li>
+<li>minimalizálja a gyakori felhasználási esetekhez szükséges lépéseket</li>
+<li>támogatja a Tensorflow és a PyTorch háttérrendszert (backend)</li>
+<li><a href="https://keras.io/">https://keras.io/</a></li>
+</ul>
+<h2 id="xgboost">XGBOOST</h2>
+<ul>
+<li>napjaink egyik legnépszerűbb ML-csomagja</li>
+<li>úgy tervezték, hogy rendkívül hatékony, rugalmas és hordozható legyen</li>
+<li>ugyanaz a kód fut a főbb elosztott környezetekben (Hadoop, SGE, MPI)</li>
+<li><a href="https://xgboost.readthedocs.io/en/stable/">https://xgboost.readthedocs.io/en/stable/</a></li>
+</ul>
+</body>
+</html>
